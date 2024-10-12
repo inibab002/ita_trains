@@ -1,0 +1,4402 @@
+grf {
+	grfid: "MB\01\02";
+	name: string(STR_GRF_NAME);
+	desc: string(STR_GRF_DESC);
+	version: 1;
+	min_compatible_version: 0;
+}
+
+railtypetable {
+    ELRL, RAIL
+}
+
+cargotable {
+PASS, COAL, MAIL, OIL_, LVST, METL, GOOD, GRAI, WOOD, IORE, BEAN, PEAT, STEL, VALU, PORE, PAPR, WHEA, CBLK, FOOD, GOLD, RUBR, FRUT, MAIZ, CORE, WATR, DIAM, SUGR, TOYS, BATT, SWET, TOFF, COLA, CTCD, BUBL, PLST, FZDR, AORE, BEER, BDMT, BRCK, CERA, CERE, CLAY, CMNT, COPR, DYES, ENSP, FERT, FICR, FISH, FMSP, FRVG, GLAS, GRVL, LIME, MILK, MNSP, OLSD, PETR, PLAS, POTA, RCYC, RFPR, SAND, SCMT, SGBT, SGCN, SULP, TOUR, VEHI, WDPR, WOOL, JAVA
+}
+
+template template_double_decker(x, y, z) {
+	[(x + (88 * z)), y, 8, 29, -3, -15]
+	[((x + 9) + (88 * z)), y, 22, 24, -16, -14]
+	[((x + 32) + (88 * z)), y, 32, 16, -16, -12]
+	[((x + 65) + (88 * z)), y, 22, 24, -5, -14]
+	[((x + 88) - (88 * z)), y, 8, 29, -3, -15]
+	[((x + 97) - (88 * z)), y, 22, 24, -14, -15]
+	[((x + 120) - (88 * z)), y, 32, 16, -16, -12]
+	[((x + 153) - (88 * z)), y, 22, 24, -6, -15]
+}
+
+template template_purchase(y)
+{
+	[0,y,70,16,-35,-8]
+}
+
+spriteset (rock_purchase,"grf\purchase.png")
+{
+	template_purchase(176)
+}
+
+spriteset(spriteset_rock_front, "grf\rock.png") {
+	template_double_decker(0, 0, 0)
+}
+
+spriteset(spriteset_rock_mid, "grf\rock.png") {
+	template_double_decker(0, 58, 0)
+}
+
+spriteset(spriteset_rock_back, "grf\rock.png") {
+	template_double_decker(0, 29, 1)
+}
+
+switch(FEAT_TRAINS, SELF, switch_rock4_articulated_part, extra_callback_info1) {
+	1..3: return item_rock4;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_rock4_graphics, (position_in_articulated_veh % 4)) {
+	0: spriteset_rock_front;
+	3: spriteset_rock_back;
+	spriteset_rock_mid;
+}
+
+item(FEAT_TRAINS, item_rock4, -1) {
+	property {
+		name: string(STR_ROCK4_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2018, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 19;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 15;
+		cost_factor: 40;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 3400 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 117;
+		weight: 296 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.15;
+		air_drag_coefficient: 0.055;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		running_cost_factor: 80;
+	}
+	graphics {
+		default: switch_rock4_graphics;
+		articulated_part: switch_rock4_articulated_part;
+		colour_mapping: palette_2cc(COLOUR_YELLOW, COLOUR_DARK_BLUE);
+		purchase: rock_purchase;
+	}
+}
+
+switch(FEAT_TRAINS, SELF, switch_rock5_articulated_part, extra_callback_info1) {
+	1..4: return item_rock5;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_rock5_graphics, (position_in_articulated_veh % 5)) {
+	0: spriteset_rock_front;
+	4: spriteset_rock_back;
+	spriteset_rock_mid;
+}
+
+item(FEAT_TRAINS, item_rock5, -1) {
+	property {
+		name: string(STR_ROCK5_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2018, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 19;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 15;
+		cost_factor: 45;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 3400 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 100;
+		weight: 364 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.12;
+		air_drag_coefficient: 0.055;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		running_cost_factor: 83;
+	}
+	graphics {
+		default: switch_rock5_graphics;
+		articulated_part: switch_rock5_articulated_part;
+		colour_mapping: palette_2cc(COLOUR_YELLOW, COLOUR_DARK_BLUE);
+		purchase: rock_purchase;
+	}
+}
+
+switch(FEAT_TRAINS, SELF, switch_rock6_articulated_part, extra_callback_info1) {
+	1..5: return item_rock6;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_rock6_graphics, (position_in_articulated_veh % 6)) {
+	0: spriteset_rock_front;
+	5: spriteset_rock_back;
+	spriteset_rock_mid;
+}
+
+item(FEAT_TRAINS, item_rock6, -1) {
+	property {
+		name: string(STR_ROCK6_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2018, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 19;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 15;
+		cost_factor: 50;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 4200 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 121;
+		weight: 444 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.15;
+		air_drag_coefficient: 0.055;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		running_cost_factor: 85;
+	}
+	graphics {
+		default: switch_rock6_graphics;
+		articulated_part: switch_rock6_articulated_part;
+		colour_mapping: palette_2cc(COLOUR_YELLOW, COLOUR_DARK_BLUE);
+		purchase: rock_purchase;
+	}
+}
+
+template template_single_decker(x, y, z) {
+	[(x + (88 * z)), y, 8, 26, -3, -13]
+	[((x + 9) + (88 * z)), y, 22, 21, -14, -11]
+	[((x + 32) + (88 * z)), y, 32, 13, -16, -10]
+	[((x + 65) + (88 * z)), y, 22, 21, -5, -12]
+	[((x + 88) - (88 * z)), y, 8, 26, -3, -13]
+	[((x + 97) - (88 * z)), y, 22, 21, -16, -11]
+	[((x + 120) - (88 * z)), y, 32, 13, -16, -10]
+	[((x + 153) - (88 * z)), y, 22, 21, -5, -12]
+}
+
+spriteset (FR1000_purchase,"grf\purchase.png")
+{
+	template_purchase(16)
+}
+
+spriteset(spriteset_FR1000_front, "grf\frecciarossa1000.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_FR1000_mid, "grf\frecciarossa1000.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_FR1000_back, "grf\frecciarossa1000.png") {
+	template_single_decker(0, 26, 1)
+}
+
+spriteset(spriteset_FR1000_rest, "grf\frecciarossa1000.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_FR1000_pant, "grf\frecciarossa1000.png") {
+	template_single_decker(0, 104, 1)
+}
+
+spriteset(spriteset_FR1000_pantb, "grf\frecciarossa1000.png") {
+	template_single_decker(0, 104, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_FR1000_articulated_part, extra_callback_info1) {
+	1..7: return item_FR1000;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_FR1000_graphics, (position_in_articulated_veh % 8)) {
+	0: spriteset_FR1000_front;
+	1:spriteset_FR1000_pant;
+	3:spriteset_FR1000_pantb;
+	4:spriteset_FR1000_pant;
+	5:spriteset_FR1000_rest;
+	6:spriteset_FR1000_pantb;
+	7: spriteset_FR1000_back;
+	spriteset_FR1000_mid;
+}
+
+item(FEAT_TRAINS, item_FR1000, -1) {
+	property {
+		name: string(STR_FR1000_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2013, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 19;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 8;
+		cost_factor: 180;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 360 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 9900 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 58;
+		weight: 501 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.15;
+		air_drag_coefficient: 0.022;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		running_cost_factor: 120;
+	}
+	graphics {
+		default: switch_FR1000_graphics;
+		articulated_part: switch_FR1000_articulated_part;
+		colour_mapping: palette_2cc(COLOUR_RED, COLOUR_GREY);
+		purchase: FR1000_purchase;
+	}
+}
+
+spriteset(blues_purchase, "grf\purchase.png")
+{
+	[0,320,70,20,-35,-10]
+}
+spriteset(spriteset_blues_front, "grf\blues.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_blues_mid, "grf\blues.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_blues_back, "grf\blues.png") {
+	template_single_decker(0, 26, 1)
+}
+
+switch(FEAT_TRAINS, SELF, switch_blues3_articulated_part, extra_callback_info1) {
+	1..2: return item_blues3;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_blues3_graphics, (position_in_articulated_veh % 3)) {
+	0: spriteset_blues_front;
+	2: spriteset_blues_back;
+	spriteset_blues_mid;
+}
+
+switch(FEAT_TRAINS, SELF, switch_power_blues3, current_railtype) {
+	RAIL: 1170;
+	ELRL: 1680;
+}
+
+switch(FEAT_TRAINS, SELF, switch_running_cost, current_railtype) {
+	RAIL: 90;
+	ELRL: 70;
+}
+
+switch(FEAT_TRAINS, SELF, switch_engine_class, current_railtype) {
+	RAIL: VISUAL_EFFECT_DIESEL;
+	ELRL: VISUAL_EFFECT_ELECTRIC;
+}
+
+item(FEAT_TRAINS, item_blues3, -1) {
+	property {
+		name: string(STR_BLUES3_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2021, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 19;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 14;
+		cost_factor: 35;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(ELRL, RAIL);
+		power: 1170 kW;
+		running_cost_base: RUNNING_COST_DIESEL;
+		running_cost_factor: 100;
+		dual_headed: 0;
+		cargo_capacity: 73;
+		weight: 162 ton;
+		engine_class: ENGINE_CLASS_DIESEL;
+		tractive_effort_coefficient: 0.15;
+		air_drag_coefficient: 0.06;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	}
+	graphics {
+		default: switch_blues3_graphics;
+		articulated_part: switch_blues3_articulated_part;
+		power: switch_power_blues3;
+		running_cost_factor: switch_running_cost;
+		visual_effect_and_powered: switch_engine_class;
+		colour_mapping: palette_2cc(COLOUR_DARK_BLUE, COLOUR_GREEN);
+		purchase: blues_purchase;
+	}
+}
+
+switch(FEAT_TRAINS, SELF, switch_blues4_articulated_part, extra_callback_info1) {
+	1..3: return item_blues4;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_blues4_graphics, (position_in_articulated_veh % 4)) {
+	0: spriteset_blues_front;
+	3: spriteset_blues_back;
+	spriteset_blues_mid;
+}
+
+switch(FEAT_TRAINS, SELF, switch_power_blues4, current_railtype) {
+	RAIL: 1330;
+	ELRL: 1910;
+}
+
+item(FEAT_TRAINS, item_blues4, -1) {
+	property {
+		name: string(STR_BLUES4_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2021, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 19;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 14;
+		cost_factor: 40;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(ELRL, RAIL);
+		power: 1330 kW;
+		running_cost_base: RUNNING_COST_DIESEL;
+		running_cost_factor: 100;
+		dual_headed: 0;
+		cargo_capacity: 73;
+		weight: 198 ton;
+		engine_class: ENGINE_CLASS_DIESEL;
+		tractive_effort_coefficient: 0.15;
+		air_drag_coefficient: 0.06;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+	}
+	graphics {
+		default: switch_blues4_graphics;
+		articulated_part: switch_blues4_articulated_part;
+		power: switch_power_blues4;
+		running_cost_factor: switch_running_cost;
+		visual_effect_and_powered: switch_engine_class;
+		colour_mapping: palette_2cc(COLOUR_DARK_BLUE, COLOUR_GREEN);
+		purchase: blues_purchase;
+	}
+}
+
+template template_short(x, y) {
+	[x, y, 8, 20, -4, -14]
+	[(x + 9), y, 16, 18, -8, -11]
+	[(x + 26), y, 20, 13, -4, -10]
+	[(x + 47), y, 16, 18, 1, -9]
+	[(x + 64), y, 8, 20, -4, -6]
+	[(x + 73), y, 16, 18, -14, -8]
+	[(x + 90), y, 20, 13, -16, -10]
+	[(x + 111), y, 16, 18, -5, -12]
+}
+
+template template_6(x, y, z) {
+	[(x + (72 * z)), y, 8, 22, -3, -13]
+	[((x + 9) + (72 * z)), y, 18, 18, -10, -11]
+	[((x + 28) + (72 * z)), y, 24, 13, -8, -10]
+	[((x + 53) + (72 * z)), y, 18, 18, -2, -10]
+	[((x + 72) - (72 * z)), y, 8, 22, -3, -8]
+	[((x + 81) - (72 * z)), y, 18, 18, -17, -8]
+	[((x + 100) - (72 * z)), y, 24, 13, -16, -10]
+	[((x + 125) - (72 * z)), y, 18, 18, -6, -12]
+}
+
+spriteset (d445_ic_purchase,"grf\purchase.png")
+{
+	template_purchase(208)
+}
+spriteset (d445_purchase,"grf\purchase.png")
+{
+	template_purchase(192)
+}
+
+spriteset(spriteset_d445_ic, "grf\d445.png") {
+	template_6(0, 0, 0)
+}
+
+spriteset(spriteset_d445_nav, "grf\d445.png") {
+	template_6(0, 22, 0)
+}
+
+spriteset(spriteset_d445_old, "grf\d445.png") {
+	template_6(0, 44, 0)
+}
+
+spriteset(spriteset_d445_new, "grf\d445.png") {
+	template_6(0, 66, 0)
+}
+
+random_switch(FEAT_TRAINS, SELF, random_d445_graphics_nav, 0) {
+1: spriteset_d445_old;
+5: spriteset_d445_nav;
+}
+
+random_switch(FEAT_TRAINS, SELF, random_d445_graphics_new, 0) {
+1: spriteset_d445_old;
+5: spriteset_d445_new;
+}
+
+switch(FEAT_TRAINS, SELF, switch_d445_graphics, date_of_last_service) {
+	0..date(1980, 12, 31): spriteset_d445_old;
+	date(1981, 1, 1)..date(2000, 12, 31): random_d445_graphics_nav;
+	random_d445_graphics_new;
+}
+
+item(FEAT_TRAINS, item_D445, -1) {
+	property {
+		name: string(STR_D445_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1975, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 35;
+		cost_factor: 20;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 130 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC);
+		refit_cost: 0;
+		track_type: bitmask(RAIL,ELRL);
+		power: 1260 kW;
+		running_cost_base: RUNNING_COST_DIESEL;
+		dual_headed: 0;
+		cargo_capacity: 0;
+		weight: 76 ton;
+		engine_class: ENGINE_CLASS_DIESEL;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.061;
+		visual_effect_and_powered: VISUAL_EFFECT_DIESEL;
+		length: 6;
+		running_cost_factor: 60;
+	}
+	graphics {
+		default: switch_d445_graphics;
+		purchase: d445_purchase;
+	}
+}
+
+spriteset(spriteset_vivalto_mid, "grf\vivalto.png") {
+	template_double_decker(0, 29, 0)
+}
+
+spriteset(spriteset_vivalto_back, "grf\vivalto.png") {
+	template_double_decker(0, 0, 0)
+}
+
+spriteset(spriteset_vivalto_mid_new, "grf\vivalto.png") {
+	template_double_decker(0, 145, 0)
+}
+
+spriteset(spriteset_vivalto_back_new, "grf\vivalto.png") {
+	template_double_decker(0, 116, 0)
+}
+
+spriteset(spriteset_vivalto_front, "grf\vivalto.png") {
+	template_double_decker(0, 0, 1)
+}
+
+switch(FEAT_TRAINS, SELF, switch_vivalto_graphics_old, position_in_consist_from_end) {
+	0: spriteset_vivalto_back;
+	spriteset_vivalto_mid;
+}
+
+switch(FEAT_TRAINS, SELF, switch_vivalto_graphics_new, position_in_consist_from_end) {
+	0: spriteset_vivalto_back_new;
+	spriteset_vivalto_mid_new;
+}
+
+switch(FEAT_TRAINS, SELF, switch_vivalto_graphics, date_of_last_service) {
+	0..date(2013, 12, 31): switch_vivalto_graphics_old;
+	switch_vivalto_graphics_new;
+}
+
+switch(FEAT_TRAINS, SELF, switch_vivalto_capacity, position_in_consist_from_end) {
+	0: return 92;
+	return 126;
+}
+
+item(FEAT_TRAINS, item_vivalto, -1) {
+	property {
+		name: string(STR_VIVALTO_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2005, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		reliability_decay: 35;
+		cost_factor: 20;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 126;
+		weight: 50 ton;
+		air_drag_coefficient: 0.055;
+		loading_speed: 14;
+		running_cost_factor: 25;
+		running_cost_base: RUNNING_COST_DIESEL;
+	}
+	graphics {
+		cargo_capacity: switch_vivalto_capacity;
+		default: switch_vivalto_graphics;
+	}
+}
+
+spriteset(spriteset_vivalto_er_mid, "grf\vivalto.png") {
+	template_double_decker(0, 87, 0)
+}
+
+spriteset(spriteset_vivalto_er_back, "grf\vivalto.png") {
+	template_double_decker(0, 58, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_vivalto_er_graphics, position_in_consist_from_end) {
+	0: spriteset_vivalto_er_back;
+	spriteset_vivalto_er_mid;
+}
+
+item(FEAT_TRAINS, item_vivalto_er, -1) {
+	property {
+		name: string(STR_VIVALTO_ER_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2005, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		reliability_decay: 35;
+		cost_factor: 20;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 126;
+		weight: 50 ton;
+		air_drag_coefficient: 0.055;
+		loading_speed: 14;
+		running_cost_factor: 25;
+		running_cost_base: RUNNING_COST_DIESEL;
+	}
+	graphics {
+		default: switch_vivalto_er_graphics;
+	}
+}
+
+spriteset (e464_ic_purchase,"grf\purchase.png")
+{
+	template_purchase(288)
+}
+spriteset (e464_fer_purchase,"grf\purchase.png")
+{
+	template_purchase(272)
+}
+spriteset (e464_purchase,"grf\purchase.png")
+{
+	template_purchase(112)
+}
+
+spriteset(spriteset_e464_fer_front, "grf\e464.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_e464_fer_back, "grf\e464.png") {
+	template_single_decker(0, 0, 1)
+}
+
+switch(FEAT_TRAINS, SELF, switch_e464_fer_graphics, position_in_consist) {
+	0: spriteset_e464_fer_front;
+	spriteset_e464_fer_back;
+}
+
+spriteset(spriteset_e464_new_front, "grf\e464.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_e464_new_back, "grf\e464.png") {
+	template_single_decker(0, 26, 1)
+}
+
+switch(FEAT_TRAINS, SELF, switch_e464_new_graphics, position_in_consist) {
+	0: spriteset_e464_new_front;
+	spriteset_e464_new_back;
+}
+
+spriteset(spriteset_e464_old_front, "grf\e464.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_e464_old_back, "grf\e464.png") {
+	template_single_decker(0, 52, 1)
+}
+
+switch(FEAT_TRAINS, SELF, switch_e464_old_graphics, position_in_consist) {
+	0: spriteset_e464_old_front;
+	spriteset_e464_old_back;
+}
+
+spriteset(spriteset_e464_ic_front, "grf\e464.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_e464_ic_back, "grf\e464.png") {
+	template_single_decker(0, 78, 1)
+}
+
+switch(FEAT_TRAINS, SELF, switch_e464_ic_graphics, position_in_consist) {
+	0: spriteset_e464_ic_front;
+	spriteset_e464_ic_back;
+}
+
+switch(FEAT_TRAINS, SELF, switch_e464_graphics, date_of_last_service) {
+	0..date(2013, 12, 31): switch_e464_old_graphics;
+	switch_e464_new_graphics;
+}
+
+item(FEAT_TRAINS, item_E464, -1) {
+	property {
+		name: string(STR_E464_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2000, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 35;
+		cost_factor: 35;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 3500 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 0;
+		weight: 72 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.055;
+		visual_effect_and_powered: VISUAL_EFFECT_ELECTRIC;
+		running_cost_factor: 55;
+	}
+	graphics {
+		default: switch_e464_graphics;
+		purchase: e464_purchase;
+	}
+}
+
+item(FEAT_TRAINS, item_E464_IC, -1) {
+	property {
+		name: string(STR_E464_IC_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2019, 6, 27);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 35;
+		cost_factor: 35;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 3500 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 0;
+		weight: 72 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.055;
+		visual_effect_and_powered: VISUAL_EFFECT_ELECTRIC;
+		running_cost_factor: 55;
+	}
+	graphics {
+		default: switch_e464_ic_graphics;
+		purchase: e464_ic_purchase;
+	}
+}
+
+item(FEAT_TRAINS, item_E464_FER, -1) {
+	property {
+		name: string(STR_E464_FER_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2004, 9, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 35;
+		cost_factor: 35;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 3500 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 0;
+		weight: 72 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.055;
+		visual_effect_and_powered: VISUAL_EFFECT_ELECTRIC;
+		running_cost_factor: 55;
+	}
+	graphics {
+		default: switch_e464_fer_graphics;
+		purchase: e464_fer_purchase;
+	}
+}
+
+template template_purchase_dh(y){
+	[65,81,2,2,-1,-1]
+	[65,81,2,2,-1,-1]
+	[65,81,2,2,-1,-1]
+	[65,81,2,2,-1,-1]
+	[65,81,2,2,-1,-1]
+	[65,81,2,2,-1,-1]
+	[0,y,70,16,-21,-8]
+	[65,81,2,2,-1,-1]
+}
+spriteset (e414_purchase,"grf\purchase.png")
+{
+	template_purchase_dh(144)
+}
+
+spriteset(spriteset_e414_front, "grf\e415.png") {
+	template_single_decker(0, 26, 1)
+}
+
+spriteset(spriteset_e414_back, "grf\e415.png") {
+	template_single_decker(0, 0, 1)
+}
+
+spriteset(spriteset_e414_old_front, "grf\e415.png") {
+	template_single_decker(0, 78, 1)
+}
+
+switch(FEAT_TRAINS, SELF, switch_e414_2024_graphics, position_in_consist) {
+	0: spriteset_e414_front;
+	spriteset_e414_back;
+}
+
+switch(FEAT_TRAINS, SELF, switch_e414_graphics, date_of_last_service) {
+	0..date(2023, 12, 31): spriteset_e414_old_front;
+	switch_e414_2024_graphics;
+}
+
+item(FEAT_TRAINS, item_E414, -1) {
+	property {
+		name: string(STR_E414_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2007, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 35;
+		cost_factor: 45;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 8000 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 1;
+		cargo_capacity: 0;
+		weight: (68 * 2) ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.048;
+		visual_effect_and_powered: VISUAL_EFFECT_ELECTRIC;
+		running_cost_factor: 75;
+	}
+	graphics {
+		default: switch_e414_graphics;
+		purchase: e414_purchase;
+	}
+}
+
+spriteset(spriteset_IC_2024_carr_graphics, "grf\e415.png") {
+	template_single_decker(0, 52, 1)
+}
+
+/*item(FEAT_TRAINS, item_IC_carr_2024, -1) {
+	property {
+		name: string(STR_IC_CARR_2024_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2024, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		reliability_decay: 35;
+		cost_factor: 30;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 66;
+		weight: 36 ton;
+		air_drag_coefficient: 0.048;
+		running_cost_factor: 20;
+		running_cost_base: RUNNING_COST_DIESEL;
+	}
+	graphics {
+		default: spriteset_IC_2024_carr_graphics;
+	}
+}*/
+
+spriteset(spriteset_IC_sun_carr_graphics, "grf\uicz.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_IC_carr_graphics, "grf\uicz.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_ICN_carr_graphics, "grf\uicz.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_IC_old_carr_graphics, "grf\uicz.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_IC_blu_carr_graphics, "grf\uicz.png") {
+	template_single_decker(0, 130, 0)
+}
+
+spriteset(spriteset_IC_pilota_graphics, "grf\uicz.png") {
+	template_single_decker(0, 104, 1)
+}
+
+spriteset(spriteset_IC_sun_pilota_graphics, "grf\uicz.png") {
+	template_single_decker(0, 156, 1)
+}
+
+random_switch(FEAT_TRAINS, SELF, random_IC_old_graphics, 0) {
+4: spriteset_IC_old_carr_graphics;
+1: spriteset_IC_blu_carr_graphics;
+}
+
+random_switch(FEAT_TRAINS, SELF, random_IC_sun_graphics, 0) {
+4: spriteset_IC_sun_carr_graphics;
+1: spriteset_IC_carr_graphics;
+}
+
+switch(FEAT_TRAINS, SELF, switch_IC_old_graphics, position_in_consist_from_end) {
+	0: spriteset_IC_pilota_graphics;
+	random_IC_old_graphics;
+}
+
+switch(FEAT_TRAINS, SELF, switch_IC_sun_graphics, position_in_consist_from_end) {
+	0: spriteset_IC_sun_pilota_graphics;
+	random_IC_sun_graphics;
+}
+
+switch(FEAT_TRAINS, SELF, switch_IC_carr_graphics, date_of_last_service) {
+	0..date(1997, 12, 31): random_IC_old_graphics;
+	date(1998, 1, 1)..date(2016, 12, 31): switch_IC_old_graphics;
+	switch_IC_sun_graphics;
+}
+
+item(FEAT_TRAINS, item_IC_carr, -1) {
+	property {
+		name: string(STR_IC_CARR_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1985, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		reliability_decay: 35;
+		cost_factor: 30;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 66;
+		weight: 36 ton;
+		air_drag_coefficient: 0.048;
+		loading_speed: 14;
+		running_cost_factor: 20;
+		running_cost_base: RUNNING_COST_DIESEL;
+	}
+	graphics {
+		default: switch_IC_carr_graphics;
+		colour_mapping: palette_2cc(COLOUR_RED, COLOUR_DARK_GREEN);
+	}
+}
+
+spriteset (minuettod_purchase,"grf\purchase.png")
+{
+	template_purchase(224)
+}
+spriteset (minuettoe_purchase,"grf\purchase.png")
+{
+	template_purchase(160)
+}
+
+spriteset(spriteset_minuetto_old_front, "grf\minuetto.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_minuetto_old_back, "grf\minuetto.png") {
+	template_single_decker(0, 26, 1)
+}
+
+spriteset(spriteset_minuetto_old_mid_el, "grf\minuetto_mid.png") {
+	template_short(0, 40)
+}
+
+spriteset(spriteset_minuetto_old_mid_di, "grf\minuetto_mid.png") {
+	template_short(0, 60)
+}
+
+spriteset(spriteset_minuetto_new_front, "grf\minuetto.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_minuetto_new_back, "grf\minuetto.png") {
+	template_single_decker(0, 0, 1)
+}
+
+spriteset(spriteset_minuetto_new_mid_el, "grf\minuetto_mid.png") {
+	template_short(0, 20)
+}
+
+spriteset(spriteset_minuetto_new_mid_di, "grf\minuetto_mid.png") {
+	template_short(0, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_minuetto_di_articulated_part, extra_callback_info1) {
+	1..2: return item_minuetto_di;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_minuetto_el_articulated_part, extra_callback_info1) {
+	1..2: return item_minuetto_el;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_minuetto_length, (position_in_articulated_veh % 3)) {
+	1: return 5;
+	return 8;
+}
+
+switch(FEAT_TRAINS, SELF, switch_minuetto_old_di_graphics, (position_in_articulated_veh % 3)) {
+	0: spriteset_minuetto_old_front;
+	2: spriteset_minuetto_old_back;
+	spriteset_minuetto_old_mid_di;
+}
+
+switch(FEAT_TRAINS, SELF, switch_minuetto_old_el_graphics, (position_in_articulated_veh % 3)) {
+	0: spriteset_minuetto_old_front;
+	2: spriteset_minuetto_old_back;
+	spriteset_minuetto_old_mid_el;
+}
+
+switch(FEAT_TRAINS, SELF, switch_minuetto_new_di_graphics, (position_in_articulated_veh % 3)) {
+	0: spriteset_minuetto_new_front;
+	2: spriteset_minuetto_new_back;
+	spriteset_minuetto_new_mid_di;
+}
+
+switch(FEAT_TRAINS, SELF, switch_minuetto_new_el_graphics, (position_in_articulated_veh % 3)) {
+	0: spriteset_minuetto_new_front;
+	2: spriteset_minuetto_new_back;
+	spriteset_minuetto_new_mid_el;
+}
+
+switch(FEAT_TRAINS, SELF, switch_minuetto_di_graphics, date_of_last_service) {
+	0..date(2014, 12, 31): switch_minuetto_old_di_graphics;
+	switch_minuetto_new_di_graphics;
+}
+
+switch(FEAT_TRAINS, SELF, switch_minuetto_el_graphics, date_of_last_service) {
+	0..date(2014, 12, 31): switch_minuetto_old_el_graphics;
+	switch_minuetto_new_el_graphics;
+}
+
+item(FEAT_TRAINS, item_minuetto_di, -1) {
+	property {
+		name: string(STR_MINUETTO_DI_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2004, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 25;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 12;
+		cost_factor: 28;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 130 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(ELRL, RAIL);
+		power: 1120 kW;
+		running_cost_base: RUNNING_COST_DIESEL;
+		running_cost_factor: 100;
+		dual_headed: 0;
+		cargo_capacity: 57;
+		weight: 100 ton;
+		engine_class: ENGINE_CLASS_DIESEL;
+		tractive_effort_coefficient: 0.15;
+		air_drag_coefficient: 0.061;
+		running_cost_factor: 80;
+	}
+	graphics {
+		default: switch_minuetto_di_graphics;
+		articulated_part: switch_minuetto_di_articulated_part;
+		length: switch_minuetto_length;
+		purchase: minuettod_purchase;
+	}
+}
+
+item(FEAT_TRAINS, item_minuetto_el, -1) {
+	property {
+		name: string(STR_MINUETTO_EL_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2004, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 25;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 12;
+		cost_factor: 30;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(ELRL);
+		power: 1250 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		running_cost_factor: 100;
+		dual_headed: 0;
+		cargo_capacity: 57;
+		weight: 92 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.15;
+		air_drag_coefficient: 0.06;
+		running_cost_factor: 80;
+	}
+	graphics {
+		default: switch_minuetto_el_graphics;
+		articulated_part: switch_minuetto_el_articulated_part;
+		length: switch_minuetto_length;
+		purchase: minuettoe_purchase;
+	}
+}
+
+spriteset (FR500_purchase,"grf\purchase.png")
+{
+	template_purchase(0)
+}
+
+spriteset(spriteset_FR500_front, "grf\frecciarossa.png") {
+	template_single_decker(0, 0, 1)
+}
+
+spriteset(spriteset_FR500_mid, "grf\frecciarossa.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_FR500_back, "grf\frecciarossa.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_FR500_old_front, "grf\frecciarossa.png") {
+	template_single_decker(0, 52, 1)
+}
+
+spriteset(spriteset_FR500_old_back, "grf\frecciarossa.png") {
+	template_single_decker(0, 52, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_FR500_articulated_part, extra_callback_info1) {
+	1..12: return item_FR500;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_FR500_old_graphics, (position_in_articulated_veh % 13)) {
+	0: spriteset_FR500_old_front;
+	12: spriteset_FR500_old_back;
+	spriteset_FR500_mid;
+}
+
+switch(FEAT_TRAINS, SELF, switch_FR500_new_graphics, (position_in_articulated_veh % 13)) {
+	0: spriteset_FR500_front;
+	12: spriteset_FR500_back;
+	spriteset_FR500_mid;
+}
+
+switch(FEAT_TRAINS, SELF, switch_FR500_graphics, date_of_last_service) {
+	0..date(2023, 12, 31): switch_FR500_old_graphics;
+	switch_FR500_new_graphics;
+}
+
+item(FEAT_TRAINS, item_FR500, -1) {
+	property {
+		name: string(STR_FR500_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1990, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 19;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 8;
+		cost_factor: 170;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 300 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 8800 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 45;
+		weight: 576 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.05;
+		air_drag_coefficient: 0.025;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		running_cost_factor: 130;
+	}
+	graphics {
+		default: switch_FR500_graphics;
+		articulated_part: switch_FR500_articulated_part;
+		purchase: FR500_purchase;
+	}
+}
+
+template template_7(x, y, z) {
+	[(x + (80 * z)), y, 8, 24, -3, -12]
+	[((x + 9) + (80 * z)), y, 20, 20, -12, -11]
+	[((x + 30) + (80 * z)), y, 28, 13, -12, -10]
+	[((x + 59) + (80 * z)), y, 20, 20, -4, -11]
+	[((x + 80) - (80 * z)), y, 8, 24, -3, -12]
+	[((x + 89) - (80 * z)), y, 20, 20, -17, -9]
+	[((x + 110) - (80 * z)), y, 28, 13, -16, -10]
+	[((x + 139) - (80 * z)), y, 20, 20, -6, -12]
+}
+
+spriteset (etr350_purchase,"grf\purchase.png")
+{
+	template_purchase(128)
+}
+
+spriteset(spriteset_etr350_front, "grf\etr350.png") {
+	template_7(0, 24, 1)
+}
+
+spriteset(spriteset_etr350_back, "grf\etr350.png") {
+	template_7(0, 0, 0)
+}
+
+spriteset(spriteset_etr350_mid, "grf\etr350_mid.png") {
+	template_6(0, 0, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_etr350_articulated_part, extra_callback_info1) {
+	1..4: return item_etr350;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_etr350_length, (position_in_articulated_veh % 5)) {
+	1..3: return 6;
+	return 7;
+}
+
+switch(FEAT_TRAINS, SELF, switch_etr350_graphics, (position_in_articulated_veh % 5)) {
+	0: spriteset_etr350_front;
+	4: spriteset_etr350_back;
+	spriteset_etr350_mid;
+}
+
+item(FEAT_TRAINS, item_etr350, -1) {
+	property {
+		name: string(STR_ETR350_EL_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2013, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 25;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 20;
+		cost_factor: 35;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(ELRL);
+		power: 2000 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		running_cost_factor: 100;
+		dual_headed: 0;
+		cargo_capacity: 85;
+		weight: 143 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.1;
+		air_drag_coefficient: 0.06;
+		running_cost_factor: 85;
+	}
+	graphics {
+		default: switch_etr350_graphics;
+		articulated_part: switch_etr350_articulated_part;
+		length: switch_etr350_length;
+		purchase: etr350_purchase;
+	}
+}
+
+spriteset (e401_purchase,"grf\purchase.png")
+{
+	template_purchase(468)
+}
+spriteset (e402a_purchase,"grf\purchase.png")
+{
+	template_purchase(200)
+}
+
+spriteset(spriteset_e401_front, "grf\e401.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_e401_back, "grf\e401.png") {
+	template_single_decker(0, 0, 1)
+}
+
+switch(FEAT_TRAINS, SELF, switch_e401_graphics, position_in_consist) {
+	0: spriteset_e401_front;
+	spriteset_e401_back;
+}
+
+spriteset(spriteset_e402a_old_front, "grf\e401.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_e402a_new_front, "grf\e401.png") {
+	template_single_decker(0, 26, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_e402a_graphics, date_of_last_service) {
+	0..date(2001, 1, 1): spriteset_e402a_old_front;
+	spriteset_e402a_new_front;
+}
+
+switch(FEAT_TRAINS, SELF, switch_e401_2a_graphics, date_of_last_service) {
+	0..date(2017, 1, 19): switch_e402a_graphics;
+	switch_e401_graphics;
+}
+
+switch(FEAT_TRAINS, SELF, switch_e401_2a_name, date_of_last_service) {
+	0..date(2017, 1, 19): string(STR_E402A_NAME);
+	default: string(STR_E401_NAME);
+}
+
+switch(FEAT_TRAINS, SELF, switch_e401_2a_speed, date_of_last_service) {
+	0..date(2017, 1, 19): 220;
+	default: 200;
+}
+
+switch(FEAT_TRAINS, SELF, switch_e401_2a_purchase, current_date) {
+	0..date(2017, 1, 19): e402a_purchase;
+	default: e401_purchase;
+}
+
+item(FEAT_TRAINS, item_E401, -1) {
+	property {
+		name: string(STR_E402A_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1994, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 35;
+		cost_factor: 35;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 220 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 6000 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 0;
+		weight: 87 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.05;
+		visual_effect_and_powered: VISUAL_EFFECT_ELECTRIC;
+		running_cost_factor: 77;
+	}
+	graphics {
+		default: switch_e401_2a_graphics;
+		name: switch_e401_2a_name;
+		speed: switch_e401_2a_speed;
+		purchase: switch_e401_2a_purchase;
+	}
+}
+
+spriteset(E412_purchase, "grf\purchase.png")
+{
+	template_purchase(64)
+}
+
+spriteset(spriteset_e412_old_front, "grf\e412.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_e412_new_front, "grf\e412.png") {
+	template_single_decker(0, 26, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_e412_graphics, date_of_last_service) {
+	0..date(2017, 1, 1): spriteset_e412_old_front;
+	spriteset_e412_new_front;
+}
+
+item(FEAT_TRAINS, item_E412, -1) {
+	property {
+		name: string(STR_E412_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1999, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 35;
+		cost_factor: 35;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 6000 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 0;
+		weight: 88 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.05;
+		visual_effect_and_powered: VISUAL_EFFECT_ELECTRIC;
+		running_cost_factor: 80;
+	}
+	graphics {
+		default: switch_e412_graphics;
+		purchase: E412_purchase;
+	}
+}
+
+spriteset(vectron_purchase, "grf\purchase.png")
+{
+	template_purchase(48)
+}
+spriteset(spriteset_vectron_cfi_front, "grf\vectron.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_vectron_inrail_front, "grf\vectron.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_vectron_obb_front, "grf\vectron.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_vectron_alpha_front, "grf\vectron.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_vectron_txlog_front, "grf\vectron.png") {
+	template_single_decker(0, 104, 0)
+}
+
+spriteset(spriteset_vectron_gts_front, "grf\vectron.png") {
+	template_single_decker(0, 130, 0)
+}
+
+spriteset(spriteset_vectron_railpool_front, "grf\vectron.png") {
+	template_single_decker(0, 156, 0)
+}
+
+spriteset(spriteset_vectron_mrce_front, "grf\vectron.png") {
+	template_single_decker(0, 182, 0)
+}
+
+spriteset(spriteset_vectron_mercitalia_front, "grf\vectron.png") {
+	template_single_decker(0, 208, 0)
+}
+
+spriteset(spriteset_vectron_oceanogate_front, "grf\vectron.png") {
+	template_single_decker(0, 234, 0)
+}
+
+random_switch(FEAT_TRAINS, SELF, random_vectron_graphics, 0) {
+8: spriteset_vectron_cfi_front;
+5: spriteset_vectron_inrail_front;
+16: spriteset_vectron_obb_front;
+6: spriteset_vectron_alpha_front;
+10: spriteset_vectron_txlog_front;
+12: spriteset_vectron_gts_front;
+9: spriteset_vectron_railpool_front;
+13: spriteset_vectron_mrce_front;
+11: spriteset_vectron_mercitalia_front;
+6: spriteset_vectron_oceanogate_front;
+}
+
+item(FEAT_TRAINS, item_vectron, -1) {
+	property {
+		name: string(STR_VECTRON_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2010, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 35;
+		cost_factor: 35;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 6400 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 0;
+		weight: 90 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.05;
+		visual_effect_and_powered: VISUAL_EFFECT_ELECTRIC;
+		running_cost_factor: 72;
+	}
+	graphics {
+		default: random_vectron_graphics;
+		purchase: vectron_purchase;
+	}
+}
+
+spriteset(spriteset_pr_old_mid, "grf\pr.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_pr_old_back, "grf\pr.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_pr_mid, "grf\pr.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_pr_back, "grf\pr.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_pr_gallinari, "grf\pr.png") {
+	template_single_decker(0, 104, 0)
+}
+
+spriteset(spriteset_pr_new_new_back, "grf\pr.png") {
+	template_single_decker(0, 130, 0)
+}
+
+spriteset(spriteset_pr_new_back, "grf\pr.png") {
+	template_single_decker(0, 156, 0)
+}
+
+spriteset(spriteset_pr_new_gallinari, "grf\pr.png") {
+	template_single_decker(0, 182, 0)
+}
+
+spriteset(spriteset_pr_new_mid, "grf\pr.png") {
+	template_single_decker(0, 208, 0)
+}
+
+random_switch(FEAT_TRAINS, SELF, random_pr_back, 0) {
+2: spriteset_pr_gallinari;
+3: spriteset_pr_back;
+}
+
+random_switch(FEAT_TRAINS, SELF, random_pr_new_back, 0) {
+2: spriteset_pr_new_gallinari;
+3: spriteset_pr_new_back;
+}
+
+random_switch(FEAT_TRAINS, SELF, random_pr_new_refit_back, 0) {
+2: spriteset_pr_new_gallinari;
+1: spriteset_pr_new_back;
+3: spriteset_pr_new_new_back;
+}
+
+switch(FEAT_TRAINS, SELF, switch_pr_back, date_of_last_service) {
+	0..date(1980, 12, 31): spriteset_pr_old_back;
+	date(1981, 1, 1)..date(1987, 12, 31): spriteset_pr_back;
+	date(1988, 1, 1)..date(1994, 12, 31): random_pr_back;
+	date(1995, 1, 1)..date(2004, 12, 31): random_pr_new_back;
+	random_pr_new_refit_back;
+}
+
+switch(FEAT_TRAINS, SELF, switch_pr_mid, date_of_last_service) {
+	0..date(1980, 12, 31): spriteset_pr_old_mid;
+	date(1981, 1, 1)..date(1994, 12, 31): spriteset_pr_mid;
+	spriteset_pr_new_mid;
+}
+
+switch(FEAT_TRAINS, SELF, switch_pr_graphics, position_in_consist_from_end) {
+	0: switch_pr_back;
+	switch_pr_mid;
+}
+
+switch(FEAT_TRAINS, SELF, switch_pr_capacity, position_in_consist_from_end) {
+	0: return 61;
+	return 89;
+}
+
+item(FEAT_TRAINS, item_PR_carr, -1) {
+	property {
+		name: string(STR_PR_CARR_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1967, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		reliability_decay: 35;
+		cost_factor: 10;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 140 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC);
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 89;
+		weight: 42 ton;
+		air_drag_coefficient: 0.06;
+		loading_speed: 16;
+		running_cost_factor: 28;
+		running_cost_base: RUNNING_COST_DIESEL;
+	}
+	graphics {
+		default: switch_pr_graphics;
+		cargo_capacity: switch_pr_capacity;
+	}
+}
+
+template template_pop(x, y, z) {
+	[(x + (72 * z)), y, 8, 22, -3, -11]
+	[((x + 9) + (72 * z)), y, 18, 18, -10, -11]
+	[((x + 28) + (72 * z)), y, 24, 13, -8, -10]
+	[((x + 53) + (72 * z)), y, 18, 18, -1, -10]
+	[((x + 72) - (72 * z)), y, 8, 22, -3, -10]
+	[((x + 81) - (72 * z)), y, 18, 18, -14, -9]
+	[((x + 100) - (72 * z)), y, 24, 13, -18, -10]
+	[((x + 125) - (72 * z)), y, 18, 18, -5, -12]
+}
+
+spriteset(pop_purchase, "grf\purchase.png")
+{
+	template_purchase(32)
+}
+spriteset(spriteset_pop_front, "grf\pop.png") {
+	template_single_decker(0, 26, 1)
+}
+
+spriteset(spriteset_pop_giro_front, "grf\pop.png") {
+	template_single_decker(0, 0, 1)
+}
+
+spriteset(spriteset_pop_back, "grf\pop.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_pop_giro_back, "grf\pop.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_pop_mid, "grf\pop_mid.png") {
+	template_pop(0, 22, 1)
+}
+
+spriteset(spriteset_pop_mid_reverse, "grf\pop_mid.png") {
+	template_pop(0, 22, 0)
+}
+
+spriteset(spriteset_pop_giro_mid, "grf\pop_mid.png") {
+	template_pop(0, 0, 1)
+}
+
+spriteset(spriteset_pop_giro_mid_reverse, "grf\pop_mid.png") {
+	template_pop(0, 0, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_pop3_articulated_part, extra_callback_info1) {
+	1..2: return item_pop3;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_pop3_length, (position_in_articulated_veh % 3)) {
+	1: return 6;
+	return 8;
+}
+
+switch(FEAT_TRAINS, SELF, switch_pop3_graphics, position_in_articulated_veh) {
+	0: spriteset_pop_front;
+	2: spriteset_pop_back;
+	spriteset_pop_mid;
+}
+
+switch(FEAT_TRAINS, SELF, switch_pop3_giro_graphics, position_in_articulated_veh) {
+	0: spriteset_pop_giro_front;
+	2: spriteset_pop_giro_back;
+	spriteset_pop_giro_mid;
+}
+
+random_switch(FEAT_TRAINS, PARENT, random_graphics_pop3, 0) {
+2: switch_pop3_giro_graphics;
+37: switch_pop3_graphics;
+}
+
+item(FEAT_TRAINS, item_pop3, -1) {
+	property {
+		name: string(STR_POP3_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2018, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 25;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 12;
+		cost_factor: 28;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(ELRL);
+		power: 2000 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		running_cost_factor: 100;
+		dual_headed: 0;
+		cargo_capacity: 80;
+		weight: 137 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.15;
+		air_drag_coefficient: 0.06;
+	}
+	graphics {
+		default: random_graphics_pop3;
+		articulated_part: switch_pop3_articulated_part;
+		length: switch_pop3_length;
+		purchase: pop_purchase;
+	}
+}
+
+switch(FEAT_TRAINS, SELF, switch_pop4_articulated_part, extra_callback_info1) {
+	1..3: return item_pop4;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_pop4_length, (position_in_articulated_veh % 4)) {
+	1..2: return 6;
+	return 8;
+}
+
+switch(FEAT_TRAINS, SELF, switch_pop4_graphics, (position_in_articulated_veh % 4)) {
+	0: spriteset_pop_front;
+	1: spriteset_pop_mid;
+	2: spriteset_pop_mid_reverse;
+	3: spriteset_pop_back;
+	spriteset_pop_mid;
+}
+
+switch(FEAT_TRAINS, SELF, switch_pop4_giro_graphics, (position_in_articulated_veh % 4)) {
+	0: spriteset_pop_giro_front;
+	1: spriteset_pop_giro_mid;
+	2: spriteset_pop_giro_mid_reverse;
+	3: spriteset_pop_giro_back;
+	spriteset_pop_giro_mid;
+}
+
+random_switch(FEAT_TRAINS, PARENT, random_graphics_pop4, 0) {
+2: switch_pop4_giro_graphics;
+37: switch_pop4_graphics;
+}
+
+item(FEAT_TRAINS, item_pop4, -1) {
+	property {
+		name: string(STR_POP4_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2018, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 25;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 12;
+		cost_factor: 38;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(ELRL);
+		power: 2000 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		running_cost_factor: 100;
+		dual_headed: 0;
+		cargo_capacity: 77;
+		weight: 180 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.15;
+		air_drag_coefficient: 0.06;
+	}
+	graphics {
+		default: random_graphics_pop4;
+		articulated_part: switch_pop4_articulated_part;
+		length: switch_pop4_length;
+		purchase: pop_purchase;
+	}
+}
+
+spriteset(spriteset_mdc_new_back, "grf\md.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_mdc_back, "grf\md.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_mdc_old_back, "grf\md.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_mdc_new, "grf\md.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_mdc, "grf\md.png") {
+	template_single_decker(0, 104, 0)
+}
+
+spriteset(spriteset_mdc_old, "grf\md.png") {
+	template_single_decker(0, 130, 0)
+}
+
+spriteset(spriteset_mde_new, "grf\md.png") {
+	template_single_decker(0, 156, 0)
+}
+
+spriteset(spriteset_mde, "grf\md.png") {
+	template_single_decker(0, 182, 0)
+}
+
+spriteset(spriteset_mde_old, "grf\md.png") {
+	template_single_decker(0, 208, 0)
+}
+
+random_switch(FEAT_TRAINS, SELF, random_md_old_graphics, 0) {
+55: spriteset_mdc_old;
+49: spriteset_mde_old;
+}
+
+random_switch(FEAT_TRAINS, SELF, random_md_graphics, 0) {
+55: spriteset_mdc;
+49: spriteset_mde;
+}
+
+random_switch(FEAT_TRAINS, SELF, random_md_new_graphics, 0) {
+55: spriteset_mdc_new;
+49: spriteset_mde_new;
+}
+
+switch(FEAT_TRAINS, SELF, switch_md_graphics_old, position_in_consist_from_end) {
+	0: spriteset_mdc_old_back;
+	random_md_old_graphics;
+}
+
+switch(FEAT_TRAINS, SELF, switch_md_graphics_temp, position_in_consist_from_end) {
+	0: spriteset_mdc_back;
+	random_md_graphics;
+}
+
+switch(FEAT_TRAINS, SELF, switch_md_graphics_new, position_in_consist_from_end) {
+	0: spriteset_mdc_new_back;
+	random_md_new_graphics;
+}
+
+switch(FEAT_TRAINS, SELF, switch_md_graphics, date_of_last_service) {
+	0..date(1997, 7, 31): switch_md_graphics_old;
+	date(1997, 8, 1)..date(2017, 1, 31): switch_md_graphics_temp;
+	switch_md_graphics_new;
+}
+
+switch(FEAT_TRAINS, SELF, switch_md_capacity, position_in_consist_from_end) {
+	0: return 60;
+	return 84;
+}
+
+item(FEAT_TRAINS, item_md, -1) {
+	property {
+		name: string(STR_CARR_MD_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1981, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		reliability_decay: 35;
+		cost_factor: 18;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU);
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 84;
+		weight: 39 ton;
+		air_drag_coefficient: 0.055;
+		loading_speed: 13;
+		running_cost_factor: 25;
+		running_cost_base: RUNNING_COST_DIESEL;
+	}
+	graphics {
+		cargo_capacity: switch_md_capacity;
+		default: switch_md_graphics;
+	}
+}
+
+spriteset(spriteset_rimorchio_empty, "grf\rimorchi.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_rimorchio_1_full, "grf\rimorchi.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_rimorchio_2_full, "grf\rimorchi.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_rimorchio_3_full, "grf\rimorchi.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_rimorchio_4_full, "grf\rimorchi.png") {
+	template_single_decker(0, 104, 0)
+}
+
+spriteset(spriteset_rimorchio_5_full, "grf\rimorchi.png") {
+	template_single_decker(0, 130, 0)
+}
+
+spriteset(spriteset_rimorchio_6_full, "grf\rimorchi.png") {
+	template_single_decker(0, 156, 0)
+}
+
+spriteset(spriteset_rimorchio_7_full, "grf\rimorchi.png") {
+	template_single_decker(0, 182, 0)
+}
+
+spriteset(spriteset_rimorchio_8_full, "grf\rimorchi.png") {
+	template_single_decker(0, 208, 0)
+}
+
+spriteset(spriteset_rimorchio_9_full, "grf\rimorchi.png") {
+	template_single_decker(0, 234, 0)
+}
+
+spriteset(spriteset_rimorchio_10_full, "grf\rimorchi.png") {
+	template_single_decker(0, 260, 0)
+}
+
+spriteset(spriteset_rimorchio_11_full, "grf\rimorchi.png") {
+	template_single_decker(0, 286, 0)
+}
+
+spriteset(spriteset_rimorchio_12_full, "grf\rimorchi.png") {
+	template_single_decker(0, 312, 0)
+}
+
+spriteset(spriteset_rimorchio_13_full, "grf\rimorchi.png") {
+	template_single_decker(0, 338, 0)
+}
+
+spriteset(spriteset_rimorchio_14_full, "grf\rimorchi.png") {
+	template_single_decker(0, 364, 0)
+}
+
+spriteset(spriteset_rimorchio_15_full, "grf\rimorchi.png") {
+	template_single_decker(0, 390, 0)
+}
+
+spritegroup spritegroup_rimorchio_1 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_1_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_1_full];
+}
+
+spritegroup spritegroup_rimorchio_2 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_2_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_2_full];
+}
+
+spritegroup spritegroup_rimorchio_3 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_3_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_3_full];
+}
+
+spritegroup spritegroup_rimorchio_4 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_4_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_4_full];
+}
+
+spritegroup spritegroup_rimorchio_5 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_5_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_5_full];
+}
+
+spritegroup spritegroup_rimorchio_6 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_6_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_6_full];
+}
+
+spritegroup spritegroup_rimorchio_7 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_7_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_7_full];
+}
+
+spritegroup spritegroup_rimorchio_8 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_8_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_8_full];
+}
+
+spritegroup spritegroup_rimorchio_9 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_9_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_9_full];
+}
+
+spritegroup spritegroup_rimorchio_10 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_10_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_10_full];
+}
+
+spritegroup spritegroup_rimorchio_11 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_11_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_11_full];
+}
+
+spritegroup spritegroup_rimorchio_12 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_12_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_12_full];
+}
+
+spritegroup spritegroup_rimorchio_13 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_13_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_13_full];
+}
+
+spritegroup spritegroup_rimorchio_14 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_14_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_14_full];
+}
+
+spritegroup spritegroup_rimorchio_15 {
+	loading: [spriteset_rimorchio_empty, spriteset_rimorchio_15_full];
+	loaded: [spriteset_rimorchio_empty, spriteset_rimorchio_15_full];
+}
+
+random_switch(FEAT_TRAINS, SELF, random_rimorchio_graphics, 0) {
+1: spritegroup_rimorchio_1;
+2: spritegroup_rimorchio_2;
+2: spritegroup_rimorchio_3;
+2: spritegroup_rimorchio_4;
+2: spritegroup_rimorchio_5;
+1: spritegroup_rimorchio_6;
+2: spritegroup_rimorchio_7;
+2: spritegroup_rimorchio_8;
+2: spritegroup_rimorchio_9;
+2: spritegroup_rimorchio_10;
+2: spritegroup_rimorchio_11;
+1: spritegroup_rimorchio_12;
+2: spritegroup_rimorchio_13;
+2: spritegroup_rimorchio_14;
+2: spritegroup_rimorchio_15;
+}
+
+item(FEAT_TRAINS, item_rimorchio, -1) {
+	property {
+		name: string(STR_WAG_RIMORCHIO_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1991, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		misc_flags: bitmask(TRAIN_FLAG_AUTOREFIT);
+		refittable_cargo_classes: bitmask(CC_PIECE_GOODS, CC_EXPRESS);
+		non_refittable_cargo_classes: 0;
+		cargo_allow_refit: [GOOD, PAPR, FOOD, RUBR, FRUT, WATR, SUGR, TOYS, BATT, SWET, TOFF, COLA, CTCD, BUBL, PLST, FZDR, BEER, BDMT, CERA, CMNT, DYES, ENSP, FERT, FISH, FMSP, FRVG, GLAS, MILK, MNSP, PLAS, RCYC, RFPR, WOOL];
+		cargo_disallow_refit: [PASS, COAL, MAIL, OIL_, LVST, GRAI, WOOD, IORE, STEL, VALU, WHEA, GOLD, MAIZ, CORE, DIAM, AORE, BRCK, CERE, CLAY, COPR, FICR, GRVL, LIME, OLSD, PETR, POTA, SAND, SCMT, SGBT, SGCN, SULP, TOUR, WDPR, VEHI, JAVA];
+		reliability_decay: 35;
+		cost_factor: 18;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 30;
+		weight: 13 ton;
+		air_drag_coefficient: 0.055;
+		loading_speed: 8;
+		running_cost_factor: 17;
+		running_cost_base: RUNNING_COST_DIESEL;
+	}
+	graphics {
+		default: random_rimorchio_graphics;
+	}
+}
+
+spriteset(spriteset_cisterna_1, "grf\cisterna.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_cisterna_2, "grf\cisterna.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_cisterna_3, "grf\cisterna.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_cisterna_4, "grf\cisterna.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_cisterna_5, "grf\cisterna.png") {
+	template_single_decker(0, 104, 0)
+}
+
+spriteset(spriteset_cisterna_6, "grf\cisterna.png") {
+	template_single_decker(0, 130, 0)
+}
+
+spriteset(spriteset_cisterna_7, "grf\cisterna.png") {
+	template_single_decker(0, 156, 0)
+}
+
+spriteset(spriteset_cisterna_8, "grf\cisterna.png") {
+	template_single_decker(0, 182, 0)
+}
+
+spriteset(spriteset_cisterna_9, "grf\cisterna.png") {
+	template_single_decker(0, 208, 0)
+}
+
+random_switch(FEAT_TRAINS, SELF, random_cisterna_graphics, 0) {
+2: spriteset_cisterna_1;
+2: spriteset_cisterna_2;
+2: spriteset_cisterna_3;
+2: spriteset_cisterna_4;
+2: spriteset_cisterna_5;
+2: spriteset_cisterna_6;
+1: spriteset_cisterna_7;
+1: spriteset_cisterna_8;
+3: spriteset_cisterna_9;
+}
+
+item(FEAT_TRAINS, item_cisterna, -1) {
+	property {
+		name: string(STR_WAG_CISTERNA_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1991, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		misc_flags: bitmask(TRAIN_FLAG_AUTOREFIT);
+		refittable_cargo_classes: bitmask(CC_LIQUID);
+		non_refittable_cargo_classes: 0;
+		cargo_allow_refit: [OIL_, RUBR, WATR, COLA, PLST, FZDR, BEER, DYES, FISH, MILK, PETR, PLAS, RFPR];
+		cargo_disallow_refit: [PASS, COAL, MAIL, LVST, GOOD, GRAI, WOOD, IORE, STEL, VALU, PAPR, WHEA, FOOD, GOLD, FRUT, MAIZ, CORE, DIAM, SUGR, TOYS, BATT, SWET, TOFF, CTCD, BUBL, AORE, BDMT, BRCK, CERA, CERE, CLAY, CMNT, COPR, ENSP, FERT, FICR, FMSP, FRVG, GLAS, GRVL, LIME, MNSP, OLSD, POTA, RCYC, SAND, SCMT, SGBT, SGCN, SULP, TOUR, VEHI, WDPR, WOOL, JAVA];
+		reliability_decay: 35;
+		cost_factor: 18;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 50;
+		weight: 22 ton;
+		air_drag_coefficient: 0.055;
+		loading_speed: 8;
+		running_cost_factor: 19;
+		running_cost_base: RUNNING_COST_DIESEL;
+	}
+	graphics {
+		default: random_cisterna_graphics;
+	}
+}
+
+spriteset(spriteset_container_empty, "grf\container.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_container_1_full, "grf\container.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_container_2_full, "grf\container.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_container_3_full, "grf\container.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_container_4_full, "grf\container.png") {
+	template_single_decker(0, 104, 0)
+}
+
+spriteset(spriteset_container_5_full, "grf\container.png") {
+	template_single_decker(0, 130, 0)
+}
+
+spriteset(spriteset_container_6_full, "grf\container.png") {
+	template_single_decker(0, 156, 0)
+}
+
+spriteset(spriteset_container_7_full, "grf\container.png") {
+	template_single_decker(0, 182, 0)
+}
+
+spriteset(spriteset_container_8_full, "grf\container.png") {
+	template_single_decker(0, 208, 0)
+}
+
+spriteset(spriteset_container_9_full, "grf\container.png") {
+	template_single_decker(0, 234, 0)
+}
+
+spriteset(spriteset_container_10_full, "grf\container.png") {
+	template_single_decker(0, 260, 0)
+}
+
+spriteset(spriteset_container_11_full, "grf\container.png") {
+	template_single_decker(0, 286, 0)
+}
+
+spriteset(spriteset_container_12_full, "grf\container.png") {
+	template_single_decker(0, 312, 0)
+}
+
+spriteset(spriteset_container_13_full, "grf\container.png") {
+	template_single_decker(0, 338, 0)
+}
+
+spriteset(spriteset_container_14_full, "grf\container.png") {
+	template_single_decker(0, 364, 0)
+}
+
+spriteset(spriteset_container_15_full, "grf\container.png") {
+	template_single_decker(0, 390, 0)
+}
+
+spriteset(spriteset_container_16_full, "grf\container.png") {
+	template_single_decker(0, 416, 0)
+}
+
+spriteset(spriteset_container_17_full, "grf\container.png") {
+	template_single_decker(0, 442, 0)
+}
+
+spriteset(spriteset_container_18_full, "grf\container.png") {
+	template_single_decker(0, 468, 0)
+}
+
+spritegroup spritegroup_container_1 {
+	loading: [spriteset_container_empty, spriteset_container_1_full];
+	loaded: [spriteset_container_empty, spriteset_container_1_full];
+}
+
+spritegroup spritegroup_container_2 {
+	loading: [spriteset_container_empty, spriteset_container_2_full];
+	loaded: [spriteset_container_empty, spriteset_container_2_full];
+}
+
+spritegroup spritegroup_container_3 {
+	loading: [spriteset_container_empty, spriteset_container_3_full];
+	loaded: [spriteset_container_empty, spriteset_container_3_full];
+}
+
+spritegroup spritegroup_container_4 {
+	loading: [spriteset_container_empty, spriteset_container_4_full];
+	loaded: [spriteset_container_empty, spriteset_container_4_full];
+}
+
+spritegroup spritegroup_container_5 {
+	loading: [spriteset_container_empty, spriteset_container_5_full];
+	loaded: [spriteset_container_empty, spriteset_container_5_full];
+}
+
+spritegroup spritegroup_container_6 {
+	loading: [spriteset_container_empty, spriteset_container_6_full];
+	loaded: [spriteset_container_empty, spriteset_container_6_full];
+}
+
+spritegroup spritegroup_container_7 {
+	loading: [spriteset_container_empty, spriteset_container_7_full];
+	loaded: [spriteset_container_empty, spriteset_container_7_full];
+}
+
+spritegroup spritegroup_container_8 {
+	loading: [spriteset_container_empty, spriteset_container_8_full];
+	loaded: [spriteset_container_empty, spriteset_container_8_full];
+}
+
+spritegroup spritegroup_container_9 {
+	loading: [spriteset_container_empty, spriteset_container_9_full];
+	loaded: [spriteset_container_empty, spriteset_container_9_full];
+}
+
+spritegroup spritegroup_container_10 {
+	loading: [spriteset_container_empty, spriteset_container_10_full];
+	loaded: [spriteset_container_empty, spriteset_container_10_full];
+}
+
+spritegroup spritegroup_container_11 {
+	loading: [spriteset_container_empty, spriteset_container_11_full];
+	loaded: [spriteset_container_empty, spriteset_container_11_full];
+}
+
+spritegroup spritegroup_container_12 {
+	loading: [spriteset_container_empty, spriteset_container_12_full];
+	loaded: [spriteset_container_empty, spriteset_container_12_full];
+}
+
+spritegroup spritegroup_container_13 {
+	loading: [spriteset_container_empty, spriteset_container_13_full];
+	loaded: [spriteset_container_empty, spriteset_container_13_full];
+}
+
+spritegroup spritegroup_container_14 {
+	loading: [spriteset_container_empty, spriteset_container_14_full];
+	loaded: [spriteset_container_empty, spriteset_container_14_full];
+}
+
+spritegroup spritegroup_container_15 {
+	loading: [spriteset_container_empty, spriteset_container_15_full];
+	loaded: [spriteset_container_empty, spriteset_container_15_full];
+}
+
+spritegroup spritegroup_container_16 {
+	loading: [spriteset_container_empty, spriteset_container_16_full];
+	loaded: [spriteset_container_empty, spriteset_container_16_full];
+}
+
+spritegroup spritegroup_container_17 {
+	loading: [spriteset_container_empty, spriteset_container_17_full];
+	loaded: [spriteset_container_empty, spriteset_container_17_full];
+}
+
+spritegroup spritegroup_container_18 {
+	loading: [spriteset_container_empty, spriteset_container_18_full];
+	loaded: [spriteset_container_empty, spriteset_container_18_full];
+}
+
+random_switch(FEAT_TRAINS, SELF, random_container_graphics, 0) {
+3: spritegroup_container_1;
+2: spritegroup_container_2;
+2: spritegroup_container_3;
+1: spritegroup_container_4;
+1: spritegroup_container_5;
+1: spritegroup_container_6;
+2: spritegroup_container_7;
+2: spritegroup_container_8;
+1: spritegroup_container_9;
+2: spritegroup_container_10;
+2: spritegroup_container_11;
+2: spritegroup_container_12;
+3: spritegroup_container_13;
+3: spritegroup_container_14;
+2: spritegroup_container_15;
+1: spritegroup_container_16;
+1: spritegroup_container_17;
+1: spritegroup_container_18;
+}
+
+item(FEAT_TRAINS, item_container, -1) {
+	property {
+		name: string(STR_WAG_CONTAINER_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1991, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		misc_flags: bitmask(TRAIN_FLAG_AUTOREFIT);
+		refittable_cargo_classes: bitmask(CC_PIECE_GOODS, CC_EXPRESS);
+		non_refittable_cargo_classes: 0;
+		cargo_allow_refit: [GOOD, PAPR, FOOD, RUBR, FRUT, WATR, SUGR, TOYS, BATT, SWET, TOFF, COLA, CTCD, BUBL, PLST, FZDR, BEER, BDMT, CERA, CMNT, DYES, ENSP, FERT, FISH, FMSP, FRVG, GLAS, MILK, MNSP, PLAS, RCYC, RFPR, WOOL];
+		cargo_disallow_refit: [PASS, COAL, MAIL, OIL_, LVST, GRAI, WOOD, IORE, STEL, VALU, WHEA, GOLD, MAIZ, CORE, DIAM, AORE, BRCK, CERE, CLAY, COPR, FICR, GRVL, LIME, OLSD, PETR, POTA, SAND, SCMT, SGBT, SGCN, SULP, TOUR, VEHI, WDPR, JAVA];
+		reliability_decay: 35;
+		cost_factor: 18;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 34;
+		weight: 13 ton;
+		air_drag_coefficient: 0.055;
+		loading_speed: 8;
+		running_cost_factor: 17;
+		running_cost_base: RUNNING_COST_DIESEL;
+	}
+	graphics {
+		default: random_container_graphics;
+	}
+}
+
+spriteset(spriteset_shimms_yb_closed, "grf\shimms.png") {
+	template_7(0, 0, 0)
+}
+
+spriteset(spriteset_shimms_gy_closed, "grf\shimms.png") {
+	template_7(0, 24, 0)
+}
+
+spriteset(spriteset_shimms_gw_closed, "grf\shimms.png") {
+	template_7(0, 48, 0)
+}
+
+spriteset(spriteset_shimms_bw_closed, "grf\shimms.png") {
+	template_7(0, 72, 0)
+}
+
+spriteset(spriteset_shimms_rb_closed, "grf\shimms.png") {
+	template_7(0, 96, 0)
+}
+
+spriteset(spriteset_shimms_rw_closed, "grf\shimms.png") {
+	template_7(0, 120, 0)
+}
+
+spriteset(spriteset_shimms_yb_closing2, "grf\shimms.png") {
+	template_7(0, 144, 0)
+}
+
+spriteset(spriteset_shimms_gy_closing2, "grf\shimms.png") {
+	template_7(0, 168, 0)
+}
+
+spriteset(spriteset_shimms_gw_closing2, "grf\shimms.png") {
+	template_7(0, 192, 0)
+}
+
+spriteset(spriteset_shimms_bw_closing2, "grf\shimms.png") {
+	template_7(0, 216, 0)
+}
+
+spriteset(spriteset_shimms_rb_closing2, "grf\shimms.png") {
+	template_7(0, 240, 0)
+}
+
+spriteset(spriteset_shimms_rw_closing2, "grf\shimms.png") {
+	template_7(0, 264, 0)
+}
+
+spriteset(spriteset_shimms_yb_closing1, "grf\shimms.png") {
+	template_7(0, 288, 0)
+}
+
+spriteset(spriteset_shimms_gy_closing1, "grf\shimms.png") {
+	template_7(0, 312, 0)
+}
+
+spriteset(spriteset_shimms_gw_closing1, "grf\shimms.png") {
+	template_7(0, 336, 0)
+}
+
+spriteset(spriteset_shimms_bw_closing1, "grf\shimms.png") {
+	template_7(0, 360, 0)
+}
+
+spriteset(spriteset_shimms_rb_closing1, "grf\shimms.png") {
+	template_7(0, 384, 0)
+}
+
+spriteset(spriteset_shimms_rw_closing1, "grf\shimms.png") {
+	template_7(0, 408, 0)
+}
+
+spriteset(spriteset_shimms_yb_empty, "grf\shimms.png") {
+	template_7(0, 432, 1)
+}
+
+spriteset(spriteset_shimms_gy_empty, "grf\shimms.png") {
+	template_7(0, 456, 1)
+}
+
+spriteset(spriteset_shimms_gw_empty, "grf\shimms.png") {
+	template_7(0, 480, 1)
+}
+
+spriteset(spriteset_shimms_bw_empty, "grf\shimms.png") {
+	template_7(0, 504, 1)
+}
+
+spriteset(spriteset_shimms_rb_empty, "grf\shimms.png") {
+	template_7(0, 528, 1)
+}
+
+spriteset(spriteset_shimms_rw_empty, "grf\shimms.png") {
+	template_7(0, 552, 1)
+}
+
+spriteset(spriteset_shimms_yb_loading1, "grf\shimms.png") {
+	template_7(0, 576, 1)
+}
+
+spriteset(spriteset_shimms_gy_loading1, "grf\shimms.png") {
+	template_7(0, 600, 1)
+}
+
+spriteset(spriteset_shimms_gw_loading1, "grf\shimms.png") {
+	template_7(0, 624, 1)
+}
+
+spriteset(spriteset_shimms_bw_loading1, "grf\shimms.png") {
+	template_7(0, 648, 1)
+}
+
+spriteset(spriteset_shimms_rb_loading1, "grf\shimms.png") {
+	template_7(0, 672, 1)
+}
+
+spriteset(spriteset_shimms_rw_loading1, "grf\shimms.png") {
+	template_7(0, 696, 1)
+}
+
+spriteset(spriteset_shimms_yb_loading2, "grf\shimms.png") {
+	template_7(0, 720, 0)
+}
+
+spriteset(spriteset_shimms_gy_loading2, "grf\shimms.png") {
+	template_7(0, 744, 0)
+}
+
+spriteset(spriteset_shimms_gw_loading2, "grf\shimms.png") {
+	template_7(0, 768, 0)
+}
+
+spriteset(spriteset_shimms_bw_loading2, "grf\shimms.png") {
+	template_7(0, 792, 0)
+}
+
+spriteset(spriteset_shimms_rb_loading2, "grf\shimms.png") {
+	template_7(0, 816, 0)
+}
+
+spriteset(spriteset_shimms_rw_loading2, "grf\shimms.png") {
+	template_7(0, 840, 0)
+}
+
+spriteset(spriteset_shimms_yb_loading3, "grf\shimms.png") {
+	template_7(0, 864, 0)
+}
+
+spriteset(spriteset_shimms_gy_loading3, "grf\shimms.png") {
+	template_7(0, 888, 0)
+}
+
+spriteset(spriteset_shimms_gw_loading3, "grf\shimms.png") {
+	template_7(0, 912, 0)
+}
+
+spriteset(spriteset_shimms_bw_loading3, "grf\shimms.png") {
+	template_7(0, 936, 0)
+}
+
+spriteset(spriteset_shimms_rb_loading3, "grf\shimms.png") {
+	template_7(0, 960, 0)
+}
+
+spriteset(spriteset_shimms_rw_loading3, "grf\shimms.png") {
+	template_7(0, 984, 0)
+}
+
+spritegroup spritegroup_shimms_yb {
+	loading: [spriteset_shimms_yb_empty, spriteset_shimms_yb_loading1, spriteset_shimms_yb_loading2, spriteset_shimms_yb_loading3, spriteset_shimms_yb_closing1, spriteset_shimms_yb_closing2, spriteset_shimms_yb_closed];
+	loaded: [spriteset_shimms_yb_closed];
+}
+
+spritegroup spritegroup_shimms_gw {
+	loading: [spriteset_shimms_gw_empty, spriteset_shimms_gw_loading1, spriteset_shimms_gw_loading2, spriteset_shimms_gw_loading3, spriteset_shimms_gw_closing1, spriteset_shimms_gw_closing2, spriteset_shimms_gw_closed];
+	loaded: [spriteset_shimms_gw_closed];
+}
+
+spritegroup spritegroup_shimms_gy {
+	loading: [spriteset_shimms_gy_empty, spriteset_shimms_gy_loading1, spriteset_shimms_gy_loading2, spriteset_shimms_gy_loading3, spriteset_shimms_gy_closing1, spriteset_shimms_gy_closing2, spriteset_shimms_gy_closed];
+	loaded: [spriteset_shimms_gy_closed];
+}
+
+spritegroup spritegroup_shimms_bw {
+	loading: [spriteset_shimms_bw_empty, spriteset_shimms_bw_loading1, spriteset_shimms_bw_loading2, spriteset_shimms_bw_loading3, spriteset_shimms_bw_closing1, spriteset_shimms_bw_closing2, spriteset_shimms_bw_closed];
+	loaded: [spriteset_shimms_bw_closed];
+}
+
+spritegroup spritegroup_shimms_rw {
+	loading: [spriteset_shimms_rw_empty, spriteset_shimms_rw_loading1, spriteset_shimms_rw_loading2, spriteset_shimms_rw_loading3, spriteset_shimms_rw_closing1, spriteset_shimms_rw_closing2, spriteset_shimms_rw_closed];
+	loaded: [spriteset_shimms_rw_closed];
+}
+
+spritegroup spritegroup_shimms_rb {
+	loading: [spriteset_shimms_rb_empty, spriteset_shimms_rb_loading1, spriteset_shimms_rb_loading2, spriteset_shimms_rb_loading3, spriteset_shimms_rb_closing1, spriteset_shimms_rb_closing2, spriteset_shimms_rb_closed];
+	loaded: [spriteset_shimms_rb_closed];
+}
+
+random_switch(FEAT_TRAINS, SELF, random_shimms_graphics, 0) {
+3: spritegroup_shimms_yb;
+1: spritegroup_shimms_gw;
+1: spritegroup_shimms_gy;
+3: spritegroup_shimms_bw;
+2: spritegroup_shimms_rb;
+2: spritegroup_shimms_rw;
+}
+
+item(FEAT_TRAINS, item_shimms, -1) {
+	property {
+		name: string(STR_WAG_SHIMMS_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1991, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		misc_flags: bitmask(TRAIN_FLAG_AUTOREFIT);
+		refittable_cargo_classes: bitmask(CC_PIECE_GOODS);
+		non_refittable_cargo_classes: bitmask(CC_OVERSIZED);
+		cargo_allow_refit: [STEL, PAPR, COPR, ENSP, FMSP, METL];
+		cargo_disallow_refit: [PASS, WOOD, COAL, WDPR, MAIL, OIL_, LVST, GOOD, GRAI, IORE, VALU, WHEA, FOOD, GOLD, RUBR, FRUT, MAIZ, CORE, WATR, DIAM, SUGR, TOYS, BATT, SWET, TOFF, COLA, CTCD, BUBL, PLST, FZDR, AORE, BEER, BDMT, BRCK, CERA, CERE, CLAY, CMNT, DYES, FERT, FICR, FISH, FRVG, GLAS, GRVL, LIME, MILK, MNSP, OLSD, PETR, PLAS, POTA, RCYC, RFPR, SAND, SCMT, SGBT, SGCN, SULP, TOUR, VEHI, WOOL, JAVA];
+		reliability_decay: 35;
+		cost_factor: 18;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 63;
+		weight: 21 ton;
+		air_drag_coefficient: 0.055;
+		loading_speed: 5;
+		running_cost_factor: 17;
+		running_cost_base: RUNNING_COST_DIESEL;
+		length: 7;
+	}
+	graphics {
+		default: random_shimms_graphics;
+	}
+}
+
+spriteset(spriteset_wood_y_empty, "grf\wood.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_wood_g_empty, "grf\wood.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_wood_r_empty, "grf\wood.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_wood_b_empty, "grf\wood.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_wood_y_wfull, "grf\wood.png") {
+	template_single_decker(0, 104, 0)
+}
+
+spriteset(spriteset_wood_g_wfull, "grf\wood.png") {
+	template_single_decker(0, 130, 0)
+}
+
+spriteset(spriteset_wood_r_wfull, "grf\wood.png") {
+	template_single_decker(0, 156, 0)
+}
+
+spriteset(spriteset_wood_b_wfull, "grf\wood.png") {
+	template_single_decker(0, 182, 0)
+}
+
+spriteset(spriteset_wood_y_whalf, "grf\wood.png") {
+	template_single_decker(0, 208, 0)
+}
+
+spriteset(spriteset_wood_g_whalf, "grf\wood.png") {
+	template_single_decker(0, 234, 0)
+}
+
+spriteset(spriteset_wood_r_whalf, "grf\wood.png") {
+	template_single_decker(0, 260, 0)
+}
+
+spriteset(spriteset_wood_b_whalf, "grf\wood.png") {
+	template_single_decker(0, 286, 0)
+}
+
+spriteset(spriteset_wood_y_afull, "grf\wood.png") {
+	template_single_decker(0, 312, 0)
+}
+
+spriteset(spriteset_wood_g_afull, "grf\wood.png") {
+	template_single_decker(0, 338, 0)
+}
+
+spriteset(spriteset_wood_r_afull, "grf\wood.png") {
+	template_single_decker(0, 364, 0)
+}
+
+spriteset(spriteset_wood_b_afull, "grf\wood.png") {
+	template_single_decker(0, 390, 0)
+}
+
+spriteset(spriteset_wood_y_ahalf, "grf\wood.png") {
+	template_single_decker(0, 416, 0)
+}
+
+spriteset(spriteset_wood_g_ahalf, "grf\wood.png") {
+	template_single_decker(0, 442, 0)
+}
+
+spriteset(spriteset_wood_r_ahalf, "grf\wood.png") {
+	template_single_decker(0, 468, 0)
+}
+
+spriteset(spriteset_wood_b_ahalf, "grf\wood.png") {
+	template_single_decker(0, 494, 0)
+}
+
+spritegroup spritegroup_wood_wy {
+	loading: [spriteset_wood_y_empty, spriteset_wood_y_whalf, spriteset_wood_y_wfull];
+	loaded: [spriteset_wood_y_empty, spriteset_wood_y_whalf, spriteset_wood_y_wfull];
+}
+
+spritegroup spritegroup_wood_ay {
+	loading: [spriteset_wood_y_empty, spriteset_wood_y_ahalf, spriteset_wood_y_afull];
+	loaded: [spriteset_wood_y_empty, spriteset_wood_y_ahalf, spriteset_wood_y_afull];
+}
+
+spritegroup spritegroup_wood_wg {
+	loading: [spriteset_wood_g_empty, spriteset_wood_g_whalf, spriteset_wood_g_wfull];
+	loaded: [spriteset_wood_g_empty, spriteset_wood_g_whalf, spriteset_wood_g_wfull];
+}
+
+spritegroup spritegroup_wood_ag {
+	loading: [spriteset_wood_g_empty, spriteset_wood_g_ahalf, spriteset_wood_g_afull];
+	loaded: [spriteset_wood_g_empty, spriteset_wood_g_ahalf, spriteset_wood_g_afull];
+}
+
+spritegroup spritegroup_wood_wr {
+	loading: [spriteset_wood_r_empty, spriteset_wood_r_whalf, spriteset_wood_r_wfull];
+	loaded: [spriteset_wood_r_empty, spriteset_wood_r_whalf, spriteset_wood_r_wfull];
+}
+
+spritegroup spritegroup_wood_ar {
+	loading: [spriteset_wood_r_empty, spriteset_wood_r_ahalf, spriteset_wood_r_afull];
+	loaded: [spriteset_wood_r_empty, spriteset_wood_r_ahalf, spriteset_wood_r_afull];
+}
+
+spritegroup spritegroup_wood_wb {
+	loading: [spriteset_wood_b_empty, spriteset_wood_b_whalf, spriteset_wood_b_wfull];
+	loaded: [spriteset_wood_b_empty, spriteset_wood_b_whalf, spriteset_wood_b_wfull];
+}
+
+spritegroup spritegroup_wood_ab {
+	loading: [spriteset_wood_b_empty, spriteset_wood_b_ahalf, spriteset_wood_b_afull];
+	loaded: [spriteset_wood_b_empty, spriteset_wood_b_ahalf, spriteset_wood_b_afull];
+}
+
+switch(FEAT_TRAINS, SELF, switch_wood_cargotype_y, cargo_type_in_veh) {
+	WOOD: spritegroup_wood_wy;
+	spritegroup_wood_ay;
+}
+
+switch(FEAT_TRAINS, SELF, switch_wood_cargotype_g, cargo_type_in_veh) {
+	WOOD: spritegroup_wood_wg;
+	spritegroup_wood_ag;
+}
+
+switch(FEAT_TRAINS, SELF, switch_wood_cargotype_r, cargo_type_in_veh) {
+	WOOD: spritegroup_wood_wr;
+	spritegroup_wood_ar;
+}
+
+switch(FEAT_TRAINS, SELF, switch_wood_cargotype_b, cargo_type_in_veh) {
+	WOOD: spritegroup_wood_wb;
+	spritegroup_wood_ab;
+}
+
+random_switch(FEAT_TRAINS, SELF, random_wood_graphics, 0) {
+1: switch_wood_cargotype_y;
+1: switch_wood_cargotype_g;
+1: switch_wood_cargotype_r;
+1: switch_wood_cargotype_b;
+}
+
+item(FEAT_TRAINS, item_wood, -1) {
+	property {
+		name: string(STR_WAG_WOOD_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1991, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		misc_flags: bitmask(TRAIN_FLAG_AUTOREFIT);
+		refittable_cargo_classes: bitmask(CC_PIECE_GOODS);
+		non_refittable_cargo_classes: bitmask(CC_OVERSIZED);
+		cargo_allow_refit: [WDPR, WOOD];
+		cargo_disallow_refit: [STEL, PAPR, COPR, ENSP, FMSP, PASS, COAL, MAIL, OIL_, LVST, GOOD, GRAI, IORE, VALU, WHEA, FOOD, GOLD, RUBR, FRUT, MAIZ, CORE, WATR, DIAM, SUGR, TOYS, BATT, SWET, TOFF, COLA, CTCD, BUBL, PLST, FZDR, AORE, BEER, BDMT, BRCK, CERA, CERE, CLAY, CMNT, DYES, FERT, FICR, FISH, FRVG, GLAS, GRVL, LIME, MILK, MNSP, OLSD, PETR, PLAS, POTA, RCYC, RFPR, SAND, SCMT, SGBT, SGCN, SULP, TOUR, VEHI, WOOL, JAVA];
+		reliability_decay: 35;
+		cost_factor: 18;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 38;
+		weight: 15 ton;
+		air_drag_coefficient: 0.055;
+		loading_speed: 12;
+		running_cost_factor: 17;
+		running_cost_base: RUNNING_COST_DIESEL;
+	}
+	graphics {
+		default: random_wood_graphics;
+	}
+}
+
+spriteset(spriteset_bulk_l_empty, "grf\bulk.png") {
+	template_7(0, 0, 0)
+}
+
+spriteset(spriteset_bulk_p_empty, "grf\bulk.png") {
+	template_7(0, 24, 0)
+}
+
+spriteset(spriteset_bulk_o_empty, "grf\bulk.png") {
+	template_7(0, 48, 0)
+}
+
+spriteset(spriteset_bulk_g_empty, "grf\bulk.png") {
+	template_7(0, 72, 0)
+}
+
+spriteset(spriteset_bulk_b_empty, "grf\bulk.png") {
+	template_7(0, 96, 0)
+}
+
+spriteset(spriteset_bulk_coal_l_half, "grf\bulk.png") {
+	template_7(0, 120, 0)
+}
+
+spriteset(spriteset_bulk_coal_p_half, "grf\bulk.png") {
+	template_7(0, 144, 0)
+}
+
+spriteset(spriteset_bulk_coal_o_half, "grf\bulk.png") {
+	template_7(0, 168, 0)
+}
+
+spriteset(spriteset_bulk_coal_g_half, "grf\bulk.png") {
+	template_7(0, 192, 0)
+}
+
+spriteset(spriteset_bulk_coal_b_half, "grf\bulk.png") {
+	template_7(0, 216, 0)
+}
+
+spriteset(spriteset_bulk_coal_l_full, "grf\bulk.png") {
+	template_7(0, 240, 0)
+}
+
+spriteset(spriteset_bulk_coal_p_full, "grf\bulk.png") {
+	template_7(0, 264, 0)
+}
+
+spriteset(spriteset_bulk_coal_o_full, "grf\bulk.png") {
+	template_7(0, 288, 0)
+}
+
+spriteset(spriteset_bulk_coal_g_full, "grf\bulk.png") {
+	template_7(0, 312, 0)
+}
+
+spriteset(spriteset_bulk_coal_b_full, "grf\bulk.png") {
+	template_7(0, 336, 0)
+}
+
+spriteset(spriteset_bulk_ore_l_half, "grf\bulk.png") {
+	template_7(0, 360, 0)
+}
+
+spriteset(spriteset_bulk_ore_p_half, "grf\bulk.png") {
+	template_7(0, 384, 0)
+}
+
+spriteset(spriteset_bulk_ore_o_half, "grf\bulk.png") {
+	template_7(0, 408, 0)
+}
+
+spriteset(spriteset_bulk_ore_g_half, "grf\bulk.png") {
+	template_7(0, 432, 0)
+}
+
+spriteset(spriteset_bulk_ore_b_half, "grf\bulk.png") {
+	template_7(0, 456, 0)
+}
+
+spriteset(spriteset_bulk_ore_l_full, "grf\bulk.png") {
+	template_7(0, 480, 0)
+}
+
+spriteset(spriteset_bulk_ore_p_full, "grf\bulk.png") {
+	template_7(0, 504, 0)
+}
+
+spriteset(spriteset_bulk_ore_o_full, "grf\bulk.png") {
+	template_7(0, 528, 0)
+}
+
+spriteset(spriteset_bulk_ore_g_full, "grf\bulk.png") {
+	template_7(0, 552, 0)
+}
+
+spriteset(spriteset_bulk_ore_b_full, "grf\bulk.png") {
+	template_7(0, 576, 0)
+}
+
+spriteset(spriteset_bulk_sand_l_half, "grf\bulk.png") {
+	template_7(0, 600, 0)
+}
+
+spriteset(spriteset_bulk_sand_p_half, "grf\bulk.png") {
+	template_7(0, 624, 0)
+}
+
+spriteset(spriteset_bulk_sand_o_half, "grf\bulk.png") {
+	template_7(0, 648, 0)
+}
+
+spriteset(spriteset_bulk_sand_g_half, "grf\bulk.png") {
+	template_7(0, 672, 0)
+}
+
+spriteset(spriteset_bulk_sand_b_half, "grf\bulk.png") {
+	template_7(0, 696, 0)
+}
+
+spriteset(spriteset_bulk_sand_l_full, "grf\bulk.png") {
+	template_7(0, 720, 0)
+}
+
+spriteset(spriteset_bulk_sand_p_full, "grf\bulk.png") {
+	template_7(0, 744, 0)
+}
+
+spriteset(spriteset_bulk_sand_o_full, "grf\bulk.png") {
+	template_7(0, 768, 0)
+}
+
+spriteset(spriteset_bulk_sand_g_full, "grf\bulk.png") {
+	template_7(0, 792, 0)
+}
+
+spriteset(spriteset_bulk_sand_b_full, "grf\bulk.png") {
+	template_7(0, 816, 0)
+}
+
+spriteset(spriteset_bulk_grain_l_half, "grf\bulk.png") {
+	template_7(0, 840, 0)
+}
+
+spriteset(spriteset_bulk_grain_p_half, "grf\bulk.png") {
+	template_7(0, 864, 0)
+}
+
+spriteset(spriteset_bulk_grain_o_half, "grf\bulk.png") {
+	template_7(0, 888, 0)
+}
+
+spriteset(spriteset_bulk_grain_g_half, "grf\bulk.png") {
+	template_7(0, 912, 0)
+}
+
+spriteset(spriteset_bulk_grain_b_half, "grf\bulk.png") {
+	template_7(0, 936, 0)
+}
+
+spriteset(spriteset_bulk_grain_l_full, "grf\bulk.png") {
+	template_7(0, 960, 0)
+}
+
+spriteset(spriteset_bulk_grain_p_full, "grf\bulk.png") {
+	template_7(0, 984, 0)
+}
+
+spriteset(spriteset_bulk_grain_o_full, "grf\bulk.png") {
+	template_7(0, 1008, 0)
+}
+
+spriteset(spriteset_bulk_grain_g_full, "grf\bulk.png") {
+	template_7(0, 1032, 0)
+}
+
+spriteset(spriteset_bulk_grain_b_full, "grf\bulk.png") {
+	template_7(0, 1056, 0)
+}
+
+spriteset(spriteset_bulk_metal_l_half, "grf\bulk.png") {
+	template_7(0, 1080, 0)
+}
+
+spriteset(spriteset_bulk_metal_p_half, "grf\bulk.png") {
+	template_7(0, 1104, 0)
+}
+
+spriteset(spriteset_bulk_metal_o_half, "grf\bulk.png") {
+	template_7(0, 1128, 0)
+}
+
+spriteset(spriteset_bulk_metal_g_half, "grf\bulk.png") {
+	template_7(0, 1152, 0)
+}
+
+spriteset(spriteset_bulk_metal_b_half, "grf\bulk.png") {
+	template_7(0, 1176, 0)
+}
+
+spriteset(spriteset_bulk_metal_l_full, "grf\bulk.png") {
+	template_7(0, 1200, 0)
+}
+
+spriteset(spriteset_bulk_metal_p_full, "grf\bulk.png") {
+	template_7(0, 1224, 0)
+}
+
+spriteset(spriteset_bulk_metal_o_full, "grf\bulk.png") {
+	template_7(0, 1248, 0)
+}
+
+spriteset(spriteset_bulk_metal_g_full, "grf\bulk.png") {
+	template_7(0, 1272, 0)
+}
+
+spriteset(spriteset_bulk_metal_b_full, "grf\bulk.png") {
+	template_7(0, 1296, 0)
+}
+
+spriteset(spriteset_bulk_l_empty_rev, "grf\bulk.png") {
+	template_7(0, 0, 1)
+}
+
+spriteset(spriteset_bulk_p_empty_rev, "grf\bulk.png") {
+	template_7(0, 24, 1)
+}
+
+spriteset(spriteset_bulk_o_empty_rev, "grf\bulk.png") {
+	template_7(0, 48, 1)
+}
+
+spriteset(spriteset_bulk_g_empty_rev, "grf\bulk.png") {
+	template_7(0, 72, 1)
+}
+
+spriteset(spriteset_bulk_b_empty_rev, "grf\bulk.png") {
+	template_7(0, 96, 1)
+}
+
+spriteset(spriteset_bulk_coal_l_half_rev, "grf\bulk.png") {
+	template_7(0, 120, 1)
+}
+
+spriteset(spriteset_bulk_coal_p_half_rev, "grf\bulk.png") {
+	template_7(0, 144, 1)
+}
+
+spriteset(spriteset_bulk_coal_o_half_rev, "grf\bulk.png") {
+	template_7(0, 168, 1)
+}
+
+spriteset(spriteset_bulk_coal_g_half_rev, "grf\bulk.png") {
+	template_7(0, 192, 1)
+}
+
+spriteset(spriteset_bulk_coal_b_half_rev, "grf\bulk.png") {
+	template_7(0, 216, 1)
+}
+
+spriteset(spriteset_bulk_coal_l_full_rev, "grf\bulk.png") {
+	template_7(0, 240, 1)
+}
+
+spriteset(spriteset_bulk_coal_p_full_rev, "grf\bulk.png") {
+	template_7(0, 264, 1)
+}
+
+spriteset(spriteset_bulk_coal_o_full_rev, "grf\bulk.png") {
+	template_7(0, 288, 1)
+}
+
+spriteset(spriteset_bulk_coal_g_full_rev, "grf\bulk.png") {
+	template_7(0, 312, 1)
+}
+
+spriteset(spriteset_bulk_coal_b_full_rev, "grf\bulk.png") {
+	template_7(0, 336, 1)
+}
+
+spriteset(spriteset_bulk_ore_l_half_rev, "grf\bulk.png") {
+	template_7(0, 360, 1)
+}
+
+spriteset(spriteset_bulk_ore_p_half_rev, "grf\bulk.png") {
+	template_7(0, 384, 1)
+}
+
+spriteset(spriteset_bulk_ore_o_half_rev, "grf\bulk.png") {
+	template_7(0, 408, 1)
+}
+
+spriteset(spriteset_bulk_ore_g_half_rev, "grf\bulk.png") {
+	template_7(0, 432, 1)
+}
+
+spriteset(spriteset_bulk_ore_b_half_rev, "grf\bulk.png") {
+	template_7(0, 456, 1)
+}
+
+spriteset(spriteset_bulk_ore_l_full_rev, "grf\bulk.png") {
+	template_7(0, 480, 1)
+}
+
+spriteset(spriteset_bulk_ore_p_full_rev, "grf\bulk.png") {
+	template_7(0, 504, 1)
+}
+
+spriteset(spriteset_bulk_ore_o_full_rev, "grf\bulk.png") {
+	template_7(0, 528, 1)
+}
+
+spriteset(spriteset_bulk_ore_g_full_rev, "grf\bulk.png") {
+	template_7(0, 552, 1)
+}
+
+spriteset(spriteset_bulk_ore_b_full_rev, "grf\bulk.png") {
+	template_7(0, 576, 1)
+}
+
+spriteset(spriteset_bulk_sand_l_half_rev, "grf\bulk.png") {
+	template_7(0, 600, 1)
+}
+
+spriteset(spriteset_bulk_sand_p_half_rev, "grf\bulk.png") {
+	template_7(0, 624, 1)
+}
+
+spriteset(spriteset_bulk_sand_o_half_rev, "grf\bulk.png") {
+	template_7(0, 648, 1)
+}
+
+spriteset(spriteset_bulk_sand_g_half_rev, "grf\bulk.png") {
+	template_7(0, 672, 1)
+}
+
+spriteset(spriteset_bulk_sand_b_half_rev, "grf\bulk.png") {
+	template_7(0, 696, 1)
+}
+
+spriteset(spriteset_bulk_sand_l_full_rev, "grf\bulk.png") {
+	template_7(0, 720, 1)
+}
+
+spriteset(spriteset_bulk_sand_p_full_rev, "grf\bulk.png") {
+	template_7(0, 744, 1)
+}
+
+spriteset(spriteset_bulk_sand_o_full_rev, "grf\bulk.png") {
+	template_7(0, 768, 1)
+}
+
+spriteset(spriteset_bulk_sand_g_full_rev, "grf\bulk.png") {
+	template_7(0, 792, 1)
+}
+
+spriteset(spriteset_bulk_sand_b_full_rev, "grf\bulk.png") {
+	template_7(0, 816, 1)
+}
+
+spriteset(spriteset_bulk_grain_l_half_rev, "grf\bulk.png") {
+	template_7(0, 840, 1)
+}
+
+spriteset(spriteset_bulk_grain_p_half_rev, "grf\bulk.png") {
+	template_7(0, 864, 1)
+}
+
+spriteset(spriteset_bulk_grain_o_half_rev, "grf\bulk.png") {
+	template_7(0, 888, 1)
+}
+
+spriteset(spriteset_bulk_grain_g_half_rev, "grf\bulk.png") {
+	template_7(0, 912, 1)
+}
+
+spriteset(spriteset_bulk_grain_b_half_rev, "grf\bulk.png") {
+	template_7(0, 936, 1)
+}
+
+spriteset(spriteset_bulk_grain_l_full_rev, "grf\bulk.png") {
+	template_7(0, 960, 1)
+}
+
+spriteset(spriteset_bulk_grain_p_full_rev, "grf\bulk.png") {
+	template_7(0, 984, 1)
+}
+
+spriteset(spriteset_bulk_grain_o_full_rev, "grf\bulk.png") {
+	template_7(0, 1008, 1)
+}
+
+spriteset(spriteset_bulk_grain_g_full_rev, "grf\bulk.png") {
+	template_7(0, 1032, 1)
+}
+
+spriteset(spriteset_bulk_grain_b_full_rev, "grf\bulk.png") {
+	template_7(0, 1056, 1)
+}
+
+spriteset(spriteset_bulk_metal_l_half_rev, "grf\bulk.png") {
+	template_7(0, 1080, 1)
+}
+
+spriteset(spriteset_bulk_metal_p_half_rev, "grf\bulk.png") {
+	template_7(0, 1104, 1)
+}
+
+spriteset(spriteset_bulk_metal_o_half_rev, "grf\bulk.png") {
+	template_7(0, 1128, 1)
+}
+
+spriteset(spriteset_bulk_metal_g_half_rev, "grf\bulk.png") {
+	template_7(0, 1152, 1)
+}
+
+spriteset(spriteset_bulk_metal_b_half_rev, "grf\bulk.png") {
+	template_7(0, 1176, 1)
+}
+
+spriteset(spriteset_bulk_metal_l_full_rev, "grf\bulk.png") {
+	template_7(0, 1200, 1)
+}
+
+spriteset(spriteset_bulk_metal_p_full_rev, "grf\bulk.png") {
+	template_7(0, 1224, 1)
+}
+
+spriteset(spriteset_bulk_metal_o_full_rev, "grf\bulk.png") {
+	template_7(0, 1248, 1)
+}
+
+spriteset(spriteset_bulk_metal_g_full_rev, "grf\bulk.png") {
+	template_7(0, 1272, 1)
+}
+
+spriteset(spriteset_bulk_metal_b_full_rev, "grf\bulk.png") {
+	template_7(0, 1296, 1)
+}
+
+spritegroup spritegroup_bulk_coal_l {
+	loading: [spriteset_bulk_l_empty, spriteset_bulk_coal_l_half, spriteset_bulk_coal_l_full];
+	loaded: [spriteset_bulk_l_empty, spriteset_bulk_coal_l_half, spriteset_bulk_coal_l_full];
+}
+
+spritegroup spritegroup_bulk_coal_p {
+	loading: [spriteset_bulk_p_empty, spriteset_bulk_coal_p_half, spriteset_bulk_coal_p_full];
+	loaded: [spriteset_bulk_p_empty, spriteset_bulk_coal_p_half, spriteset_bulk_coal_p_full];
+}
+
+spritegroup spritegroup_bulk_coal_o {
+	loading: [spriteset_bulk_o_empty, spriteset_bulk_coal_o_half, spriteset_bulk_coal_o_full];
+	loaded: [spriteset_bulk_o_empty, spriteset_bulk_coal_o_half, spriteset_bulk_coal_o_full];
+}
+
+spritegroup spritegroup_bulk_coal_g {
+	loading: [spriteset_bulk_g_empty, spriteset_bulk_coal_g_half, spriteset_bulk_coal_g_full];
+	loaded: [spriteset_bulk_g_empty, spriteset_bulk_coal_g_half, spriteset_bulk_coal_g_full];
+}
+
+spritegroup spritegroup_bulk_coal_b {
+	loading: [spriteset_bulk_b_empty, spriteset_bulk_coal_b_half, spriteset_bulk_coal_b_full];
+	loaded: [spriteset_bulk_b_empty, spriteset_bulk_coal_b_half, spriteset_bulk_coal_b_full];
+}
+
+spritegroup spritegroup_bulk_ore_l {
+	loading: [spriteset_bulk_l_empty, spriteset_bulk_ore_l_half, spriteset_bulk_ore_l_full];
+	loaded: [spriteset_bulk_l_empty, spriteset_bulk_ore_l_half, spriteset_bulk_ore_l_full];
+}
+
+spritegroup spritegroup_bulk_ore_p {
+	loading: [spriteset_bulk_p_empty, spriteset_bulk_ore_p_half, spriteset_bulk_ore_p_full];
+	loaded: [spriteset_bulk_p_empty, spriteset_bulk_ore_p_half, spriteset_bulk_ore_p_full];
+}
+
+spritegroup spritegroup_bulk_ore_o {
+	loading: [spriteset_bulk_o_empty, spriteset_bulk_ore_o_half, spriteset_bulk_ore_o_full];
+	loaded: [spriteset_bulk_o_empty, spriteset_bulk_ore_o_half, spriteset_bulk_ore_o_full];
+}
+
+spritegroup spritegroup_bulk_ore_g {
+	loading: [spriteset_bulk_g_empty, spriteset_bulk_ore_g_half, spriteset_bulk_ore_g_full];
+	loaded: [spriteset_bulk_g_empty, spriteset_bulk_ore_g_half, spriteset_bulk_ore_g_full];
+}
+
+spritegroup spritegroup_bulk_ore_b {
+	loading: [spriteset_bulk_b_empty, spriteset_bulk_ore_b_half, spriteset_bulk_ore_b_full];
+	loaded: [spriteset_bulk_b_empty, spriteset_bulk_ore_b_half, spriteset_bulk_ore_b_full];
+}
+
+spritegroup spritegroup_bulk_sand_l {
+	loading: [spriteset_bulk_l_empty, spriteset_bulk_sand_l_half, spriteset_bulk_sand_l_full];
+	loaded: [spriteset_bulk_l_empty, spriteset_bulk_sand_l_half, spriteset_bulk_sand_l_full];
+}
+
+spritegroup spritegroup_bulk_sand_p {
+	loading: [spriteset_bulk_p_empty, spriteset_bulk_sand_p_half, spriteset_bulk_sand_p_full];
+	loaded: [spriteset_bulk_p_empty, spriteset_bulk_sand_p_half, spriteset_bulk_sand_p_full];
+}
+
+spritegroup spritegroup_bulk_sand_o {
+	loading: [spriteset_bulk_o_empty, spriteset_bulk_sand_o_half, spriteset_bulk_sand_o_full];
+	loaded: [spriteset_bulk_o_empty, spriteset_bulk_sand_o_half, spriteset_bulk_sand_o_full];
+}
+
+spritegroup spritegroup_bulk_sand_g {
+	loading: [spriteset_bulk_g_empty, spriteset_bulk_sand_g_half, spriteset_bulk_sand_g_full];
+	loaded: [spriteset_bulk_g_empty, spriteset_bulk_sand_g_half, spriteset_bulk_sand_g_full];
+}
+
+spritegroup spritegroup_bulk_sand_b {
+	loading: [spriteset_bulk_b_empty, spriteset_bulk_sand_b_half, spriteset_bulk_sand_b_full];
+	loaded: [spriteset_bulk_b_empty, spriteset_bulk_sand_b_half, spriteset_bulk_sand_b_full];
+}
+
+spritegroup spritegroup_bulk_grain_l {
+	loading: [spriteset_bulk_l_empty, spriteset_bulk_grain_l_half, spriteset_bulk_grain_l_full];
+	loaded: [spriteset_bulk_l_empty, spriteset_bulk_grain_l_half, spriteset_bulk_grain_l_full];
+}
+
+spritegroup spritegroup_bulk_grain_p {
+	loading: [spriteset_bulk_p_empty, spriteset_bulk_grain_p_half, spriteset_bulk_grain_p_full];
+	loaded: [spriteset_bulk_p_empty, spriteset_bulk_grain_p_half, spriteset_bulk_grain_p_full];
+}
+
+spritegroup spritegroup_bulk_grain_o {
+	loading: [spriteset_bulk_o_empty, spriteset_bulk_grain_o_half, spriteset_bulk_grain_o_full];
+	loaded: [spriteset_bulk_o_empty, spriteset_bulk_grain_o_half, spriteset_bulk_grain_o_full];
+}
+
+spritegroup spritegroup_bulk_grain_g {
+	loading: [spriteset_bulk_g_empty, spriteset_bulk_grain_g_half, spriteset_bulk_grain_g_full];
+	loaded: [spriteset_bulk_g_empty, spriteset_bulk_grain_g_half, spriteset_bulk_grain_g_full];
+}
+
+spritegroup spritegroup_bulk_grain_b {
+	loading: [spriteset_bulk_b_empty, spriteset_bulk_grain_b_half, spriteset_bulk_grain_b_full];
+	loaded: [spriteset_bulk_b_empty, spriteset_bulk_grain_b_half, spriteset_bulk_grain_b_full];
+}
+
+spritegroup spritegroup_bulk_metal_l {
+	loading: [spriteset_bulk_l_empty, spriteset_bulk_metal_l_half, spriteset_bulk_metal_l_full];
+	loaded: [spriteset_bulk_l_empty, spriteset_bulk_metal_l_half, spriteset_bulk_metal_l_full];
+}
+
+spritegroup spritegroup_bulk_metal_p {
+	loading: [spriteset_bulk_p_empty, spriteset_bulk_metal_p_half, spriteset_bulk_metal_p_full];
+	loaded: [spriteset_bulk_p_empty, spriteset_bulk_metal_p_half, spriteset_bulk_metal_p_full];
+}
+
+spritegroup spritegroup_bulk_metal_o {
+	loading: [spriteset_bulk_o_empty, spriteset_bulk_metal_o_half, spriteset_bulk_metal_o_full];
+	loaded: [spriteset_bulk_o_empty, spriteset_bulk_metal_o_half, spriteset_bulk_metal_o_full];
+}
+
+spritegroup spritegroup_bulk_metal_g {
+	loading: [spriteset_bulk_g_empty, spriteset_bulk_metal_g_half, spriteset_bulk_metal_g_full];
+	loaded: [spriteset_bulk_g_empty, spriteset_bulk_metal_g_half, spriteset_bulk_metal_g_full];
+}
+
+spritegroup spritegroup_bulk_metal_b {
+	loading: [spriteset_bulk_b_empty, spriteset_bulk_metal_b_half, spriteset_bulk_metal_b_full];
+	loaded: [spriteset_bulk_b_empty, spriteset_bulk_metal_b_half, spriteset_bulk_metal_b_full];
+}
+
+spritegroup spritegroup_bulk_coal_l_rev {
+	loading: [spriteset_bulk_l_empty_rev, spriteset_bulk_coal_l_half_rev, spriteset_bulk_coal_l_full_rev];
+	loaded: [spriteset_bulk_l_empty_rev, spriteset_bulk_coal_l_half_rev, spriteset_bulk_coal_l_full_rev];
+}
+
+spritegroup spritegroup_bulk_coal_p_rev {
+	loading: [spriteset_bulk_p_empty_rev, spriteset_bulk_coal_p_half_rev, spriteset_bulk_coal_p_full_rev];
+	loaded: [spriteset_bulk_p_empty_rev, spriteset_bulk_coal_p_half_rev, spriteset_bulk_coal_p_full_rev];
+}
+
+spritegroup spritegroup_bulk_coal_o_rev {
+	loading: [spriteset_bulk_o_empty_rev, spriteset_bulk_coal_o_half_rev, spriteset_bulk_coal_o_full_rev];
+	loaded: [spriteset_bulk_o_empty_rev, spriteset_bulk_coal_o_half_rev, spriteset_bulk_coal_o_full_rev];
+}
+
+spritegroup spritegroup_bulk_coal_g_rev {
+	loading: [spriteset_bulk_g_empty_rev, spriteset_bulk_coal_g_half_rev, spriteset_bulk_coal_g_full_rev];
+	loaded: [spriteset_bulk_g_empty_rev, spriteset_bulk_coal_g_half_rev, spriteset_bulk_coal_g_full_rev];
+}
+
+spritegroup spritegroup_bulk_coal_b_rev {
+	loading: [spriteset_bulk_b_empty_rev, spriteset_bulk_coal_b_half_rev, spriteset_bulk_coal_b_full_rev];
+	loaded: [spriteset_bulk_b_empty_rev, spriteset_bulk_coal_b_half_rev, spriteset_bulk_coal_b_full_rev];
+}
+
+spritegroup spritegroup_bulk_ore_l_rev {
+	loading: [spriteset_bulk_l_empty_rev, spriteset_bulk_ore_l_half_rev, spriteset_bulk_ore_l_full_rev];
+	loaded: [spriteset_bulk_l_empty_rev, spriteset_bulk_ore_l_half_rev, spriteset_bulk_ore_l_full_rev];
+}
+
+spritegroup spritegroup_bulk_ore_p_rev {
+	loading: [spriteset_bulk_p_empty_rev, spriteset_bulk_ore_p_half_rev, spriteset_bulk_ore_p_full_rev];
+	loaded: [spriteset_bulk_p_empty_rev, spriteset_bulk_ore_p_half_rev, spriteset_bulk_ore_p_full_rev];
+}
+
+spritegroup spritegroup_bulk_ore_o_rev {
+	loading: [spriteset_bulk_o_empty_rev, spriteset_bulk_ore_o_half_rev, spriteset_bulk_ore_o_full_rev];
+	loaded: [spriteset_bulk_o_empty_rev, spriteset_bulk_ore_o_half_rev, spriteset_bulk_ore_o_full_rev];
+}
+
+spritegroup spritegroup_bulk_ore_g_rev {
+	loading: [spriteset_bulk_g_empty_rev, spriteset_bulk_ore_g_half_rev, spriteset_bulk_ore_g_full_rev];
+	loaded: [spriteset_bulk_g_empty_rev, spriteset_bulk_ore_g_half_rev, spriteset_bulk_ore_g_full_rev];
+}
+
+spritegroup spritegroup_bulk_ore_b_rev {
+	loading: [spriteset_bulk_b_empty_rev, spriteset_bulk_ore_b_half_rev, spriteset_bulk_ore_b_full_rev];
+	loaded: [spriteset_bulk_b_empty_rev, spriteset_bulk_ore_b_half_rev, spriteset_bulk_ore_b_full_rev];
+}
+
+spritegroup spritegroup_bulk_sand_l_rev {
+	loading: [spriteset_bulk_l_empty_rev, spriteset_bulk_sand_l_half_rev, spriteset_bulk_sand_l_full_rev];
+	loaded: [spriteset_bulk_l_empty_rev, spriteset_bulk_sand_l_half_rev, spriteset_bulk_sand_l_full_rev];
+}
+
+spritegroup spritegroup_bulk_sand_p_rev {
+	loading: [spriteset_bulk_p_empty_rev, spriteset_bulk_sand_p_half_rev, spriteset_bulk_sand_p_full_rev];
+	loaded: [spriteset_bulk_p_empty_rev, spriteset_bulk_sand_p_half_rev, spriteset_bulk_sand_p_full_rev];
+}
+
+spritegroup spritegroup_bulk_sand_o_rev {
+	loading: [spriteset_bulk_o_empty_rev, spriteset_bulk_sand_o_half_rev, spriteset_bulk_sand_o_full_rev];
+	loaded: [spriteset_bulk_o_empty_rev, spriteset_bulk_sand_o_half_rev, spriteset_bulk_sand_o_full_rev];
+}
+
+spritegroup spritegroup_bulk_sand_g_rev {
+	loading: [spriteset_bulk_g_empty_rev, spriteset_bulk_sand_g_half_rev, spriteset_bulk_sand_g_full_rev];
+	loaded: [spriteset_bulk_g_empty_rev, spriteset_bulk_sand_g_half_rev, spriteset_bulk_sand_g_full_rev];
+}
+
+spritegroup spritegroup_bulk_sand_b_rev {
+	loading: [spriteset_bulk_b_empty_rev, spriteset_bulk_sand_b_half_rev, spriteset_bulk_sand_b_full_rev];
+	loaded: [spriteset_bulk_b_empty_rev, spriteset_bulk_sand_b_half_rev, spriteset_bulk_sand_b_full_rev];
+}
+
+spritegroup spritegroup_bulk_grain_l_rev {
+	loading: [spriteset_bulk_l_empty_rev, spriteset_bulk_grain_l_half_rev, spriteset_bulk_grain_l_full_rev];
+	loaded: [spriteset_bulk_l_empty_rev, spriteset_bulk_grain_l_half_rev, spriteset_bulk_grain_l_full_rev];
+}
+
+spritegroup spritegroup_bulk_grain_p_rev {
+	loading: [spriteset_bulk_p_empty_rev, spriteset_bulk_grain_p_half_rev, spriteset_bulk_grain_p_full_rev];
+	loaded: [spriteset_bulk_p_empty_rev, spriteset_bulk_grain_p_half_rev, spriteset_bulk_grain_p_full_rev];
+}
+
+spritegroup spritegroup_bulk_grain_o_rev {
+	loading: [spriteset_bulk_o_empty_rev, spriteset_bulk_grain_o_half_rev, spriteset_bulk_grain_o_full_rev];
+	loaded: [spriteset_bulk_o_empty_rev, spriteset_bulk_grain_o_half_rev, spriteset_bulk_grain_o_full_rev];
+}
+
+spritegroup spritegroup_bulk_grain_g_rev {
+	loading: [spriteset_bulk_g_empty_rev, spriteset_bulk_grain_g_half_rev, spriteset_bulk_grain_g_full_rev];
+	loaded: [spriteset_bulk_g_empty_rev, spriteset_bulk_grain_g_half_rev, spriteset_bulk_grain_g_full_rev];
+}
+
+spritegroup spritegroup_bulk_grain_b_rev {
+	loading: [spriteset_bulk_b_empty_rev, spriteset_bulk_grain_b_half_rev, spriteset_bulk_grain_b_full_rev];
+	loaded: [spriteset_bulk_b_empty_rev, spriteset_bulk_grain_b_half_rev, spriteset_bulk_grain_b_full_rev];
+}
+
+spritegroup spritegroup_bulk_metal_l_rev {
+	loading: [spriteset_bulk_l_empty_rev, spriteset_bulk_metal_l_half_rev, spriteset_bulk_metal_l_full_rev];
+	loaded: [spriteset_bulk_l_empty_rev, spriteset_bulk_metal_l_half_rev, spriteset_bulk_metal_l_full_rev];
+}
+
+spritegroup spritegroup_bulk_metal_p_rev {
+	loading: [spriteset_bulk_p_empty_rev, spriteset_bulk_metal_p_half_rev, spriteset_bulk_metal_p_full_rev];
+	loaded: [spriteset_bulk_p_empty_rev, spriteset_bulk_metal_p_half_rev, spriteset_bulk_metal_p_full_rev];
+}
+
+spritegroup spritegroup_bulk_metal_o_rev {
+	loading: [spriteset_bulk_o_empty_rev, spriteset_bulk_metal_o_half_rev, spriteset_bulk_metal_o_full_rev];
+	loaded: [spriteset_bulk_o_empty_rev, spriteset_bulk_metal_o_half_rev, spriteset_bulk_metal_o_full_rev];
+}
+
+spritegroup spritegroup_bulk_metal_g_rev {
+	loading: [spriteset_bulk_g_empty_rev, spriteset_bulk_metal_g_half_rev, spriteset_bulk_metal_g_full_rev];
+	loaded: [spriteset_bulk_g_empty_rev, spriteset_bulk_metal_g_half_rev, spriteset_bulk_metal_g_full_rev];
+}
+
+spritegroup spritegroup_bulk_metal_b_rev {
+	loading: [spriteset_bulk_b_empty_rev, spriteset_bulk_metal_b_half_rev, spriteset_bulk_metal_b_full_rev];
+	loaded: [spriteset_bulk_b_empty_rev, spriteset_bulk_metal_b_half_rev, spriteset_bulk_metal_b_full_rev];
+}
+
+switch(FEAT_TRAINS, SELF, switch_bulk_cargotype_l, cargo_type_in_veh) {
+	COAL: spritegroup_bulk_coal_l;
+	CBLK: spritegroup_bulk_coal_l;
+	GRAI: spritegroup_bulk_grain_l;
+	WHEA: spritegroup_bulk_grain_l;
+	MAIZ: spritegroup_bulk_grain_l;
+	OLSD: spritegroup_bulk_grain_l;
+	FICR: spritegroup_bulk_grain_l;
+	CERE: spritegroup_bulk_grain_l;
+	SGBT: spritegroup_bulk_grain_l;
+	IORE: spritegroup_bulk_ore_l;
+	AORE: spritegroup_bulk_ore_l;
+	BEAN: spritegroup_bulk_ore_l;
+	CLAY: spritegroup_bulk_ore_l;
+	PEAT: spritegroup_bulk_ore_l;
+	PORE: spritegroup_bulk_ore_l;
+	SAND: spritegroup_bulk_sand_l;
+	SULP: spritegroup_bulk_sand_l;
+	CORE: spritegroup_bulk_sand_l;
+	SGCN: spritegroup_bulk_sand_l;
+	spritegroup_bulk_metal_l;
+}
+
+switch(FEAT_TRAINS, SELF, switch_bulk_cargotype_p, cargo_type_in_veh) {
+	COAL: spritegroup_bulk_coal_p;
+	CBLK: spritegroup_bulk_coal_p;
+	GRAI: spritegroup_bulk_grain_p;
+	WHEA: spritegroup_bulk_grain_p;
+	MAIZ: spritegroup_bulk_grain_p;
+	OLSD: spritegroup_bulk_grain_p;
+	FICR: spritegroup_bulk_grain_p;
+	CERE: spritegroup_bulk_grain_p;
+	SGBT: spritegroup_bulk_grain_p;
+	IORE: spritegroup_bulk_ore_p;
+	AORE: spritegroup_bulk_ore_p;
+	BEAN: spritegroup_bulk_ore_p;
+	CLAY: spritegroup_bulk_ore_p;
+	PEAT: spritegroup_bulk_ore_p;
+	PORE: spritegroup_bulk_ore_p;
+	SAND: spritegroup_bulk_sand_p;
+	SULP: spritegroup_bulk_sand_p;
+	CORE: spritegroup_bulk_sand_p;
+	SGCN: spritegroup_bulk_sand_p;
+	spritegroup_bulk_metal_p;
+}
+
+switch(FEAT_TRAINS, SELF, switch_bulk_cargotype_o, cargo_type_in_veh) {
+	COAL: spritegroup_bulk_coal_o;
+	CBLK: spritegroup_bulk_coal_o;
+	GRAI: spritegroup_bulk_grain_o;
+	WHEA: spritegroup_bulk_grain_o;
+	MAIZ: spritegroup_bulk_grain_o;
+	OLSD: spritegroup_bulk_grain_o;
+	FICR: spritegroup_bulk_grain_o;
+	CERE: spritegroup_bulk_grain_o;
+	SGBT: spritegroup_bulk_grain_o;
+	IORE: spritegroup_bulk_ore_o;
+	AORE: spritegroup_bulk_ore_o;
+	BEAN: spritegroup_bulk_ore_o;
+	CLAY: spritegroup_bulk_ore_o;
+	PEAT: spritegroup_bulk_ore_o;
+	PORE: spritegroup_bulk_ore_o;
+	SAND: spritegroup_bulk_sand_o;
+	SULP: spritegroup_bulk_sand_o;
+	CORE: spritegroup_bulk_sand_o;
+	SGCN: spritegroup_bulk_sand_o;
+	spritegroup_bulk_metal_o;
+}
+
+switch(FEAT_TRAINS, SELF, switch_bulk_cargotype_g, cargo_type_in_veh) {
+	COAL: spritegroup_bulk_coal_g;
+	CBLK: spritegroup_bulk_coal_g;
+	GRAI: spritegroup_bulk_grain_g;
+	WHEA: spritegroup_bulk_grain_g;
+	MAIZ: spritegroup_bulk_grain_g;
+	OLSD: spritegroup_bulk_grain_g;
+	FICR: spritegroup_bulk_grain_g;
+	CERE: spritegroup_bulk_grain_g;
+	SGBT: spritegroup_bulk_grain_g;
+	IORE: spritegroup_bulk_ore_g;
+	AORE: spritegroup_bulk_ore_g;
+	BEAN: spritegroup_bulk_ore_g;
+	CLAY: spritegroup_bulk_ore_g;
+	PEAT: spritegroup_bulk_ore_g;
+	PORE: spritegroup_bulk_ore_g;
+	SAND: spritegroup_bulk_sand_g;
+	SULP: spritegroup_bulk_sand_g;
+	CORE: spritegroup_bulk_sand_g;
+	SGCN: spritegroup_bulk_sand_g;
+	spritegroup_bulk_metal_g;
+}
+
+switch(FEAT_TRAINS, SELF, switch_bulk_cargotype_b, cargo_type_in_veh) {
+	COAL: spritegroup_bulk_coal_b;
+	CBLK: spritegroup_bulk_coal_b;
+	GRAI: spritegroup_bulk_grain_b;
+	WHEA: spritegroup_bulk_grain_b;
+	MAIZ: spritegroup_bulk_grain_b;
+	OLSD: spritegroup_bulk_grain_b;
+	FICR: spritegroup_bulk_grain_b;
+	CERE: spritegroup_bulk_grain_b;
+	SGBT: spritegroup_bulk_grain_b;
+	IORE: spritegroup_bulk_ore_b;
+	AORE: spritegroup_bulk_ore_b;
+	BEAN: spritegroup_bulk_ore_b;
+	CLAY: spritegroup_bulk_ore_b;
+	PEAT: spritegroup_bulk_ore_b;
+	PORE: spritegroup_bulk_ore_b;
+	SAND: spritegroup_bulk_sand_b;
+	SULP: spritegroup_bulk_sand_b;
+	CORE: spritegroup_bulk_sand_b;
+	SGCN: spritegroup_bulk_sand_b;
+	spritegroup_bulk_metal_b;
+}
+
+switch(FEAT_TRAINS, SELF, switch_bulk_cargotype_l_rev, cargo_type_in_veh) {
+	COAL: spritegroup_bulk_coal_l_rev;
+	CBLK: spritegroup_bulk_coal_l_rev;
+	GRAI: spritegroup_bulk_grain_l_rev;
+	WHEA: spritegroup_bulk_grain_l_rev;
+	MAIZ: spritegroup_bulk_grain_l_rev;
+	OLSD: spritegroup_bulk_grain_l_rev;
+	FICR: spritegroup_bulk_grain_l_rev;
+	CERE: spritegroup_bulk_grain_l_rev;
+	SGBT: spritegroup_bulk_grain_l_rev;
+	IORE: spritegroup_bulk_ore_l_rev;
+	AORE: spritegroup_bulk_ore_l_rev;
+	BEAN: spritegroup_bulk_ore_l_rev;
+	CLAY: spritegroup_bulk_ore_l_rev;
+	PEAT: spritegroup_bulk_ore_l_rev;
+	PORE: spritegroup_bulk_ore_l_rev;
+	SAND: spritegroup_bulk_sand_l_rev;
+	SULP: spritegroup_bulk_sand_l_rev;
+	CORE: spritegroup_bulk_sand_l_rev;
+	SGCN: spritegroup_bulk_sand_l_rev;
+	spritegroup_bulk_metal_l_rev;
+}
+
+switch(FEAT_TRAINS, SELF, switch_bulk_cargotype_p_rev, cargo_type_in_veh) {
+	COAL: spritegroup_bulk_coal_p_rev;
+	CBLK: spritegroup_bulk_coal_p_rev;
+	GRAI: spritegroup_bulk_grain_p_rev;
+	WHEA: spritegroup_bulk_grain_p_rev;
+	MAIZ: spritegroup_bulk_grain_p_rev;
+	OLSD: spritegroup_bulk_grain_p_rev;
+	FICR: spritegroup_bulk_grain_p_rev;
+	CERE: spritegroup_bulk_grain_p_rev;
+	SGBT: spritegroup_bulk_grain_p_rev;
+	IORE: spritegroup_bulk_ore_p_rev;
+	AORE: spritegroup_bulk_ore_p_rev;
+	BEAN: spritegroup_bulk_ore_p_rev;
+	CLAY: spritegroup_bulk_ore_p_rev;
+	PEAT: spritegroup_bulk_ore_p_rev;
+	PORE: spritegroup_bulk_ore_p_rev;
+	SAND: spritegroup_bulk_sand_p_rev;
+	SULP: spritegroup_bulk_sand_p_rev;
+	CORE: spritegroup_bulk_sand_p_rev;
+	SGCN: spritegroup_bulk_sand_p_rev;
+	spritegroup_bulk_metal_p_rev;
+}
+
+switch(FEAT_TRAINS, SELF, switch_bulk_cargotype_o_rev, cargo_type_in_veh) {
+	COAL: spritegroup_bulk_coal_o_rev;
+	CBLK: spritegroup_bulk_coal_o_rev;
+	GRAI: spritegroup_bulk_grain_o_rev;
+	WHEA: spritegroup_bulk_grain_o_rev;
+	MAIZ: spritegroup_bulk_grain_o_rev;
+	OLSD: spritegroup_bulk_grain_o_rev;
+	FICR: spritegroup_bulk_grain_o_rev;
+	CERE: spritegroup_bulk_grain_o_rev;
+	SGBT: spritegroup_bulk_grain_o_rev;
+	IORE: spritegroup_bulk_ore_o_rev;
+	AORE: spritegroup_bulk_ore_o_rev;
+	BEAN: spritegroup_bulk_ore_o_rev;
+	CLAY: spritegroup_bulk_ore_o_rev;
+	PEAT: spritegroup_bulk_ore_o_rev;
+	PORE: spritegroup_bulk_ore_o_rev;
+	SAND: spritegroup_bulk_sand_o_rev;
+	SULP: spritegroup_bulk_sand_o_rev;
+	CORE: spritegroup_bulk_sand_o_rev;
+	SGCN: spritegroup_bulk_sand_o_rev;
+	spritegroup_bulk_metal_o_rev;
+}
+
+switch(FEAT_TRAINS, SELF, switch_bulk_cargotype_g_rev, cargo_type_in_veh) {
+	COAL: spritegroup_bulk_coal_g_rev;
+	CBLK: spritegroup_bulk_coal_g_rev;
+	GRAI: spritegroup_bulk_grain_g_rev;
+	WHEA: spritegroup_bulk_grain_g_rev;
+	MAIZ: spritegroup_bulk_grain_g_rev;
+	OLSD: spritegroup_bulk_grain_g_rev;
+	FICR: spritegroup_bulk_grain_g_rev;
+	CERE: spritegroup_bulk_grain_g_rev;
+	SGBT: spritegroup_bulk_grain_g_rev;
+	IORE: spritegroup_bulk_ore_g_rev;
+	AORE: spritegroup_bulk_ore_g_rev;
+	BEAN: spritegroup_bulk_ore_g_rev;
+	CLAY: spritegroup_bulk_ore_g_rev;
+	PEAT: spritegroup_bulk_ore_g_rev;
+	PORE: spritegroup_bulk_ore_g_rev;
+	SAND: spritegroup_bulk_sand_g_rev;
+	SULP: spritegroup_bulk_sand_g_rev;
+	CORE: spritegroup_bulk_sand_g_rev;
+	SGCN: spritegroup_bulk_sand_g_rev;
+	spritegroup_bulk_metal_g_rev;
+}
+
+switch(FEAT_TRAINS, SELF, switch_bulk_cargotype_b_rev, cargo_type_in_veh) {
+	COAL: spritegroup_bulk_coal_b_rev;
+	CBLK: spritegroup_bulk_coal_b_rev;
+	GRAI: spritegroup_bulk_grain_b_rev;
+	WHEA: spritegroup_bulk_grain_b_rev;
+	MAIZ: spritegroup_bulk_grain_b_rev;
+	OLSD: spritegroup_bulk_grain_b_rev;
+	FICR: spritegroup_bulk_grain_b_rev;
+	CERE: spritegroup_bulk_grain_b_rev;
+	SGBT: spritegroup_bulk_grain_b_rev;
+	IORE: spritegroup_bulk_ore_b_rev;
+	AORE: spritegroup_bulk_ore_b_rev;
+	BEAN: spritegroup_bulk_ore_b_rev;
+	CLAY: spritegroup_bulk_ore_b_rev;
+	PEAT: spritegroup_bulk_ore_b_rev;
+	PORE: spritegroup_bulk_ore_b_rev;
+	SAND: spritegroup_bulk_sand_b_rev;
+	SULP: spritegroup_bulk_sand_b_rev;
+	CORE: spritegroup_bulk_sand_b_rev;
+	SGCN: spritegroup_bulk_sand_b_rev;
+	spritegroup_bulk_metal_b_rev;
+}
+
+random_switch(FEAT_TRAINS, SELF, random_bulk_graphics, 0) {
+1: switch_bulk_cargotype_l;
+1: switch_bulk_cargotype_p;
+1: switch_bulk_cargotype_o;
+1: switch_bulk_cargotype_g;
+1: switch_bulk_cargotype_b;
+1: switch_bulk_cargotype_l_rev;
+1: switch_bulk_cargotype_p_rev;
+1: switch_bulk_cargotype_o_rev;
+1: switch_bulk_cargotype_g_rev;
+1: switch_bulk_cargotype_b_rev;
+}
+
+item(FEAT_TRAINS, item_bulk, -1) {
+	property {
+		name: string(STR_WAG_BULK_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1991, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		misc_flags: bitmask(TRAIN_FLAG_AUTOREFIT);
+		refittable_cargo_classes: bitmask(CC_BULK);
+		non_refittable_cargo_classes: 0;
+		cargo_allow_refit: [COAL, GRAI, IORE, WHEA, RUBR, BEAN, PEAT, PORE, FRUT, MAIZ, CBLK, CORE, SUGR, AORE, BDMT, CERE, CLAY, CMNT, FERT, FICR, GRVL, LIME, OLSD, POTA, RCYC, SAND, SCMT, SGBT, SGCN, SULP];
+		cargo_disallow_refit: [PASS, MAIL, OIL_, BRCK, LVST, GOOD, WOOD, STEL, VALU, PAPR, FOOD, GOLD, WATR, DIAM, TOYS, BATT, SWET, TOFF, COLA, CTCD, BUBL, PLST, FZDR, BEER, CERA, COPR, JAVA, WDPR, DYES, ENSP, FISH, FMSP, FRVG, GLAS, MILK, MNSP, PETR, PLAS, RFPR, TOUR, VEHI, WOOL];
+		reliability_decay: 35;
+		cost_factor: 18;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 200 km/h;
+		refit_cost: 0;
+		track_type: bitmask(RAIL, ELRL);
+		dual_headed: 0;
+		cargo_capacity: 34;
+		weight: 21 ton;
+		air_drag_coefficient: 0.055;
+		loading_speed: 12;
+		running_cost_factor: 17;
+		running_cost_base: RUNNING_COST_DIESEL;
+		length: 7;
+	}
+	graphics {
+		default: random_bulk_graphics;
+	}
+}
+
+item(FEAT_TRAINS, item_D445_ic, -1) {
+	property {
+		name: string(STR_D445_IC_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(2018, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 30;
+		reliability_decay: 35;
+		cost_factor: 20;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 130 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC);
+		refit_cost: 0;
+		track_type: RAIL;
+		power: 1260 kW;
+		running_cost_base: RUNNING_COST_DIESEL;
+		dual_headed: 0;
+		cargo_capacity: 0;
+		weight: 76 ton;
+		engine_class: ENGINE_CLASS_DIESEL;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.061;
+		visual_effect_and_powered: VISUAL_EFFECT_DIESEL;
+		length: 6;
+		running_cost_factor: 60;
+	}
+	graphics {
+		default: spriteset_d445_ic;
+		purchase: d445_ic_purchase;
+	}
+}
+
+spriteset(etr460_purchase, "grf\purchase.png")
+{
+	template_purchase(436)
+}
+spriteset(etr460_fb_purchase, "grf\purchase.png")
+{
+	template_purchase(420)
+}
+spriteset(etr460_fa_purchase, "grf\purchase.png")
+{
+	template_purchase(452)
+}
+switch(FEAT_TRAINS, SELF, switch_ETR460_purchase, current_date) {
+	0..date(2014, 12, 31): etr460_purchase;
+	etr460_fb_purchase;
+}
+
+spriteset(spriteset_ETR_460_front, "grf\pendolino_new.png") {
+	template_single_decker(0, 26, 1)
+}
+
+spriteset(spriteset_ETR_460_back, "grf\pendolino_new.png") {
+	template_single_decker(0, 26, 0)
+}
+
+spriteset(spriteset_ETR_460_rest, "grf\pendolino_new.png") {
+	template_single_decker(0, 78, 0)
+}
+
+spriteset(spriteset_ETR_460_high, "grf\pendolino_new.png") {
+	template_single_decker(0, 156, 0)
+}
+
+spriteset(spriteset_ETR_460_low, "grf\pendolino_new.png") {
+	template_single_decker(0, 234, 0)
+}
+
+spriteset(spriteset_ETR_460_front_FB, "grf\pendolino_new.png") {
+	template_single_decker(0, 0, 1)
+}
+
+spriteset(spriteset_ETR_460_back_FB, "grf\pendolino_new.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_ETR_460_rest_FB, "grf\pendolino_new.png") {
+	template_single_decker(0, 104, 0)
+}
+
+spriteset(spriteset_ETR_460_high_FB, "grf\pendolino_new.png") {
+	template_single_decker(0, 182, 0)
+}
+
+spriteset(spriteset_ETR_460_low_FB, "grf\pendolino_new.png") {
+	template_single_decker(0, 260, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_ETR_460_articulated_part, extra_callback_info1) {
+	1..8: return item_ETR460;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+switch(FEAT_TRAINS, SELF, switch_ETR_460_graphics, (position_in_articulated_veh % 9)) {
+	0: spriteset_ETR_460_front;
+	1: spriteset_ETR_460_high;
+	3: spriteset_ETR_460_rest;
+	4: spriteset_ETR_460_high;
+	7: spriteset_ETR_460_high;
+	8: spriteset_ETR_460_back;
+	spriteset_ETR_460_low;
+}
+
+switch(FEAT_TRAINS, SELF, switch_ETR_460_FB_graphics, (position_in_articulated_veh % 9)) {
+	0: spriteset_ETR_460_front_FB;
+	1: spriteset_ETR_460_high_FB;
+	3: spriteset_ETR_460_rest_FB;
+	4: spriteset_ETR_460_high_FB;
+	7: spriteset_ETR_460_high_FB;
+	8: spriteset_ETR_460_back_FB;
+	spriteset_ETR_460_low_FB;
+}
+
+switch(FEAT_TRAINS, SELF, switch_ETR460_graphics, date_of_last_service) {
+	0..date(2014, 12, 31): switch_ETR_460_graphics;
+	switch_ETR_460_FB_graphics;
+}
+
+item(FEAT_TRAINS, item_ETR460, -1) {
+	property {
+		name: string(STR_ETR_460_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1993, 1, 8);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 25;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 8;
+		cost_factor: 130;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 250 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU, TRAIN_FLAG_TILT);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 5880 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 54;
+		weight: 440 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.2;
+		air_drag_coefficient: 0.032;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		running_cost_factor: 150;
+	}
+	graphics {
+		default: switch_ETR460_graphics;
+		articulated_part: switch_ETR_460_articulated_part;
+		purchase: switch_ETR460_purchase;
+	}
+}
+
+switch(FEAT_TRAINS, SELF, switch_ETR480_purchase, current_date) {
+	0..date(2014, 12, 31): etr460_purchase;
+	etr460_fa_purchase;
+}
+spriteset(spriteset_ETR_480_front, "grf\pendolino_new.png") {
+	template_single_decker(0, 52, 1)
+}
+
+spriteset(spriteset_ETR_480_back, "grf\pendolino_new.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_ETR_480_rest, "grf\pendolino_new.png") {
+	template_single_decker(0, 130, 0)
+}
+
+spriteset(spriteset_ETR_480_high, "grf\pendolino_new.png") {
+	template_single_decker(0, 208, 0)
+}
+
+spriteset(spriteset_ETR_480_low, "grf\pendolino_new.png") {
+	template_single_decker(0, 286, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_ETR_480_graphics, (position_in_articulated_veh % 9)) {
+	0: spriteset_ETR_480_front;
+	1: spriteset_ETR_480_high;
+	3: spriteset_ETR_480_rest;
+	4: spriteset_ETR_480_high;
+	7: spriteset_ETR_480_high;
+	8: spriteset_ETR_480_back;
+	spriteset_ETR_480_low;
+}
+
+switch(FEAT_TRAINS, SELF, switch_ETR480_graphics, date_of_last_service) {
+	0..date(2007, 12, 31): switch_ETR_460_graphics;
+	switch_ETR_480_graphics;
+}
+
+switch(FEAT_TRAINS, SELF, switch_ETR_480_articulated_part, extra_callback_info1) {
+	1..8: return item_ETR480;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+item(FEAT_TRAINS, item_ETR480, -1) {
+	property {
+		name: string(STR_ETR_480_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1997, 1, 2);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 25;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 8;
+		cost_factor: 130;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 250 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU, TRAIN_FLAG_TILT);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 5880 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 55;
+		weight: 440 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.2;
+		air_drag_coefficient: 0.032;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		running_cost_factor: 150;
+	}
+	graphics {
+		default: switch_ETR480_graphics;
+		articulated_part: switch_ETR_480_articulated_part;
+		purchase: switch_ETR480_purchase;
+	}
+}
+
+spriteset(etr450_purchase, "grf\purchase.png")
+{
+	template_purchase(404)
+}
+spriteset(spriteset_ETR_450_front, "grf\pendolino.png") {
+	template_single_decker(0, 0, 1)
+}
+
+spriteset(spriteset_ETR_450_back, "grf\pendolino.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_ETR_450_mid, "grf\pendolino.png") {
+	template_single_decker(0, 52, 0)
+}
+
+spriteset(spriteset_ETR_450_pantof, "grf\pendolino.png") {
+	template_single_decker(0, 26, 1)
+}
+
+spriteset(spriteset_ETR_450_pantob, "grf\pendolino.png") {
+	template_single_decker(0, 26, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_ETR_450_graphics, (position_in_articulated_veh % 9)) {
+	0: spriteset_ETR_450_front;
+	2: spriteset_ETR_450_pantof;
+	4: spriteset_ETR_450_pantob;
+	6: spriteset_ETR_450_pantob;
+	8: spriteset_ETR_450_back;
+	spriteset_ETR_450_mid;
+}
+
+switch(FEAT_TRAINS, SELF, switch_ETR_450_articulated_part, extra_callback_info1) {
+	1..8: return item_ETR450;
+	return CB_RESULT_NO_MORE_ARTICULATED_PARTS;
+}
+
+item(FEAT_TRAINS, item_ETR450, -1) {
+	property {
+		name: string(STR_ETR_450_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1988, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 27;
+		reliability_decay: 20;
+		refittable_cargo_classes: bitmask(CC_PASSENGERS);
+		non_refittable_cargo_classes: bitmask();
+		loading_speed: 8;
+		cost_factor: 110;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 250 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC, TRAIN_FLAG_MU, TRAIN_FLAG_TILT);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 5008 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 44;
+		weight: 435 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.267;
+		air_drag_coefficient: 0.032;
+		visual_effect_and_powered: visual_effect_and_powered(VISUAL_EFFECT_ELECTRIC, 2, DISABLE_WAGON_POWER);
+		running_cost_factor: 150;
+	}
+	graphics {
+		default: switch_ETR_450_graphics;
+		articulated_part: switch_ETR_450_articulated_part;
+		purchase: etr450_purchase;
+	}
+}
+
+spriteset(e632_purchase, "grf\purchase.png")
+{
+	template_purchase(96)
+}
+spriteset(spriteset_e632_old, "grf\e632.png") {
+	template_single_decker(0, 0, 0)
+}
+
+spriteset(spriteset_e632, "grf\e632.png") {
+	template_single_decker(0, 26, 0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_e632_graphics, date_of_last_service) {
+	0..date(1996, 7, 31): spriteset_e632_old;
+	spriteset_e632;
+}
+
+item(FEAT_TRAINS, item_E632, -1) {
+	property {
+		name: string(STR_E632_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1982, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 34;
+		reliability_decay: 35;
+		cost_factor: 37;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 160 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 4900 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 0;
+		weight: 103 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.055;
+		visual_effect_and_powered: VISUAL_EFFECT_ELECTRIC;
+		running_cost_factor: 65;
+	}
+	graphics {
+		default: switch_e632_graphics;
+		purchase: e632_purchase;
+	}
+}
+
+item(FEAT_TRAINS, item_E633, -1) {
+	property {
+		name: string(STR_E633_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1980, 1, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 34;
+		reliability_decay: 35;
+		cost_factor: 33;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 130 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC);
+		refit_cost: 0;
+		track_type: ELRL;
+		power: 4900 kW;
+		running_cost_base: RUNNING_COST_ELECTRIC;
+		dual_headed: 0;
+		cargo_capacity: 0;
+		weight: 103 ton;
+		engine_class: ENGINE_CLASS_ELECTRIC;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.062;
+		visual_effect_and_powered: VISUAL_EFFECT_ELECTRIC;
+		running_cost_factor: 65;
+	}
+	graphics {
+		default: switch_e632_graphics;
+		purchase: e632_purchase;
+	}
+}
+
+spriteset(aln668_1_old_purchase, "grf\purchase.png")
+{
+	template_purchase(240)
+}
+spriteset(aln668_1_purchase, "grf\purchase.png")
+{
+	template_purchase(256)
+}
+spriteset(aln668_1_new_purchase, "grf\purchase.png")
+{
+	template_purchase(340)
+}
+spriteset(aln668_1_xmpr_purchase, "grf\purchase.png")
+{
+	template_purchase(356)
+}
+switch(FEAT_TRAINS, SELF, switch_aln668_1_purchase, current_date)
+{
+	0..date(1957,12,31):aln668_1_old_purchase;
+	date(1958,01,01)..date(1963,12,31):aln668_1_purchase;
+	date(1964,01,01)..date(1997,12,31):aln668_1_new_purchase;
+	aln668_1_xmpr_purchase;
+}
+
+spriteset(spriteset_aln668_1_old, "grf/aln668.png")
+{
+	template_7(0,0,0)
+}
+spriteset(spriteset_aln668_1, "grf/aln668.png")
+{
+	template_7(0,24,0)
+}
+spriteset(spriteset_aln668_1_mid, "grf/aln668.png")
+{
+	template_7(0,48,0)
+}
+spriteset(spriteset_aln668_1_back, "grf/aln668.png")
+{
+	template_7(0,72,0)
+}
+spriteset(spriteset_aln668_1_front, "grf/aln668.png")
+{
+	template_7(0,96,0)
+}
+spriteset(spriteset_aln668_1_new, "grf/aln668.png")
+{
+	template_7(0,120,0)
+}
+spriteset(spriteset_aln668_1_xmpr, "grf/aln668.png")
+{
+	template_7(0,144,0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_aln668_1_check, position_in_consist)
+{
+	0:spriteset_aln668_1_front;
+	spriteset_aln668_1_mid;
+}
+switch(FEAT_TRAINS, SELF, switch_aln668_1_single, position_in_consist)
+{
+	0:spriteset_aln668_1;
+	spriteset_aln668_1_back;
+}
+switch(FEAT_TRAINS, SELF, switch_aln668_1_pass, position_in_consist_from_end)
+{
+	0:switch_aln668_1_single;
+	switch_aln668_1_check;
+}
+switch(FEAT_TRAINS, SELF, switch_aln668_1_graphics, date_of_last_service)
+{
+	0..date(1957,12,31):spriteset_aln668_1_old;
+	date(1958,01,01)..date(1963,12,31):switch_aln668_1_pass;
+	date(1964,01,01)..date(1997,12,31):spriteset_aln668_1_new;
+	spriteset_aln668_1_xmpr;
+}
+
+item(FEAT_TRAINS, item_ALN668_1, -1) {
+	property {
+		name: string(STR_ALN668_1_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1956, 8, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 34;
+		reliability_decay: 35;
+		cost_factor: 30;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 110 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC);
+		refit_cost: 0;
+		track_type: bitmask(RAIL,ELRL);
+		power: 230 kW;
+		running_cost_base: RUNNING_COST_DIESEL;
+		dual_headed: 0;
+		cargo_capacity: 68;
+		refittable_cargo_classes: PASS;
+		weight: 32 ton;
+		engine_class: ENGINE_CLASS_DIESEL;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.073;
+		visual_effect_and_powered: VISUAL_EFFECT_DIESEL;
+		running_cost_factor: 50;
+		length:7;
+	}
+	graphics {
+		default: switch_aln668_1_graphics;
+		purchase: switch_aln668_1_purchase;
+	}
+}
+
+spriteset(aln668_3_old_purchase, "grf\purchase.png")
+{
+	template_purchase(372)
+}
+spriteset(aln668_3_xmpr_purchase, "grf\purchase.png")
+{
+	template_purchase(388)
+}
+switch(FEAT_TRAINS, SELF, switch_aln668_3_purchase, current_date)
+{
+	0..date(1996,12,31):aln668_3_old_purchase;
+	aln668_3_xmpr_purchase;
+}
+
+spriteset(spriteset_aln668_3_old, "grf/aln668.png")
+{
+	template_7(0,168,0)
+}
+
+spriteset(spriteset_aln668_3_xmpr, "grf/aln668.png")
+{
+	template_7(0,192,0)
+}
+
+switch(FEAT_TRAINS, SELF, switch_aln668_3_graphics, date_of_last_service)
+{
+	0..date(1996,12,31):spriteset_aln668_3_old;
+	spriteset_aln668_3_xmpr;
+}
+
+item(FEAT_TRAINS, item_ALN668_3, -1) {
+	property {
+		name: string(STR_ALN668_3_NAME);
+		climates_available: bitmask(CLIMATE_TEMPERATE, CLIMATE_ARCTIC, CLIMATE_TROPICAL);
+		introduction_date: date(1975, 8, 1);
+		model_life: VEHICLE_NEVER_EXPIRES;
+		vehicle_life: 34;
+		reliability_decay: 35;
+		cost_factor: 30;
+		sprite_id: SPRITE_ID_NEW_TRAIN;
+		speed: 130 km/h;
+		misc_flags: bitmask(TRAIN_FLAG_2CC);
+		refit_cost: 0;
+		track_type: bitmask(RAIL,ELRL);
+		power: 400 kW;
+		running_cost_base: RUNNING_COST_DIESEL;
+		dual_headed: 0;
+		cargo_capacity: 68;
+		refittable_cargo_classes: PASS;
+		weight: 37 ton;
+		engine_class: ENGINE_CLASS_DIESEL;
+		tractive_effort_coefficient: 0.3;
+		air_drag_coefficient: 0.061;
+		visual_effect_and_powered: VISUAL_EFFECT_DIESEL;
+		running_cost_factor: 53;
+		length:7;
+	}
+	graphics {
+		default: switch_aln668_3_graphics;
+		purchase: switch_aln668_3_purchase;
+	}
+}
+
+
+
+
+
+
+
+
+
+sort(FEAT_TRAINS, [
+    //metros
+    
+    //steam
+
+    //diesel
+	item_D445,
+	item_D445_ic,
+
+	
+
+    //dmu
+ 	item_ALN668_1,
+	item_ALN668_3,
+	item_minuetto_di,
+    
+    //electric
+	item_E632,
+	item_E633,
+	item_E401,
+	item_E412,
+    item_E464,
+	item_E464_FER,
+	item_E414,
+	item_vectron,
+	item_E464_IC,
+    
+    //emu
+	item_ETR450,
+	item_FR500,
+	item_ETR460,
+	item_ETR480,
+	item_minuetto_el,
+	item_etr350,
+	item_FR1000,
+	item_rock4,
+	item_rock5,
+	item_rock6,
+	item_pop3,
+	item_pop4,
+
+	//battery
+
+	//hybrid
+	item_blues3,
+	item_blues4,
+
+    //coaches
+	item_PR_carr,
+	item_md,
+	item_IC_carr,
+
+    //doubledecker coaches
+	item_vivalto,
+	item_vivalto_er,
+
+    //sleepers
+
+    //baggage/mail wagons
+
+    //wagons
+	item_container,
+	item_bulk,
+	item_wood,
+	item_shimms,
+	item_rimorchio,
+]);
